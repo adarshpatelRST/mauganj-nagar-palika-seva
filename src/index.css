@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --mnp-primary: #2196F3;
+  --mnp-primary-hover: #1976D2;
+  --mnp-primary-soft: #E8F4FE;
+  --mnp-secondary: #1E88E5;
+  --mnp-teal: #009688;
+  --mnp-teal-hover: #00796B;
+  --mnp-teal-soft: #E0F2F1;
+  --mnp-accent: #2196F3;
+  --mnp-accent-hover: #1976D2;
+  --mnp-accent-soft: #E8F4FE;
+  --mnp-bg: #F6F8FB;
+  --mnp-surface: #FFFFFF;
+  --mnp-surface-muted: #F1F5F9;
+  --mnp-input-bg: #F2F8FE;
+  --mnp-text: #1A2433;
+  --mnp-text-secondary: #4B5B70;
+  --mnp-text-muted: #6C7D93;
+  --mnp-border: #E8EEF5;
+  --mnp-border-strong: #D1DFEE;
+  --mnp-success: #2E7D32;
+  --mnp-success-bg: #E8F5E9;
+  --mnp-warning: #C25E00;
+  --mnp-warning-bg: #FFF3E0;
+  --mnp-error: #D32F2F;
+  --mnp-error-bg: #FFEBEE;
+  --mnp-info: #1976D2;
+  --mnp-info-bg: #E3F2FD;
+  --mnp-shadow-card: 0 2px 10px rgba(15, 23, 42, 0.06);
+  --mnp-shadow-header: 0 2px 8px rgba(33, 150, 243, 0.22);
+  --mnp-shadow-nav: 0 -2px 10px rgba(33, 150, 243, 0.18);
+}
+
+.dark {
+  --mnp-primary: #42A5F5;
+  --mnp-primary-hover: #64B5F6;
+  --mnp-primary-soft: #132A42;
+  --mnp-secondary: #64B5F6;
+  --mnp-teal: #26A69A;
+  --mnp-teal-hover: #4DB6AC;
+  --mnp-teal-soft: #0E2F2D;
+  --mnp-accent: #42A5F5;
+  --mnp-accent-hover: #64B5F6;
+  --mnp-accent-soft: #132A42;
+  --mnp-bg: #0D141D;
+  --mnp-surface: #16202C;
+  --mnp-surface-muted: #1E2B3A;
+  --mnp-input-bg: #182636;
+  --mnp-text: #F1F5F9;
+  --mnp-text-secondary: #CBD5E1;
+  --mnp-text-muted: #94A3B8;
+  --mnp-border: #243447;
+  --mnp-border-strong: #334861;
+  --mnp-success: #4ADE80;
+  --mnp-success-bg: #0F2D1C;
+  --mnp-warning: #FBBF24;
+  --mnp-warning-bg: #33230A;
+  --mnp-error: #F87171;
+  --mnp-error-bg: #3A1518;
+  --mnp-info: #64B5F6;
+  --mnp-info-bg: #132A42;
+  --mnp-shadow-card: 0 2px 10px rgba(0, 0, 0, 0.32);
+  --mnp-shadow-header: 0 2px 8px rgba(0, 0, 0, 0.45);
+  --mnp-shadow-nav: 0 -2px 10px rgba(0, 0, 0, 0.4);
+}
+
+@layer base {
+  html {
+    font-family: "Noto Sans Devanagari", "Noto Sans", system-ui, -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--mnp-bg);
+    color: var(--mnp-text);
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.phone-scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.phone-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.phone-scroll::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 4px;
+}
