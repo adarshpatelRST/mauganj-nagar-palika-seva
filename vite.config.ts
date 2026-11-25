@@ -7,7 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(() => {
   return {
-    base: '/complaint-management-system-mauganj/',
+    base: '/mauganj-nagar-palika-seva/',
     plugins: [
       react(),
       tailwindcss(),
@@ -21,7 +21,7 @@ export default defineConfig(() => {
           'pwa-maskable-512x512.png',
         ],
         manifest: {
-          id: '/complaint-management-system-mauganj/',
+          id: '/mauganj-nagar-palika-seva/',
           name: 'Mauganj Nagar Palika Seva',
           short_name: 'Mauganj Seva',
           description:
@@ -29,8 +29,8 @@ export default defineConfig(() => {
           theme_color: '#2196F3',
           background_color: '#F6F8FB',
           display: 'standalone',
-          start_url: '/complaint-management-system-mauganj/',
-          scope: '/complaint-management-system-mauganj/',
+          start_url: '/mauganj-nagar-palika-seva/',
+          scope: '/mauganj-nagar-palika-seva/',
           icons: [
             {
               src: 'pwa-192x192.png',
