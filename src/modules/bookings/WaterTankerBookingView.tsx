@@ -207,7 +207,7 @@ export const WaterTankerBookingView: React.FC<WaterTankerBookingViewProps> = ({ 
                 {language === 'hi' ? 'आबंटित वाहन:' : 'Vehicle:'}
               </span>
               <span className="font-bold text-emerald-700 dark:text-emerald-300">
-                {submittedBooking.vehicleNo || 'MP-19-WT-0244'}
+                {submittedBooking.vehicleNo || 'MP-49-WT-0244'}
               </span>
             </div>
             <div className="flex justify-between">
@@ -262,11 +262,10 @@ export const WaterTankerBookingView: React.FC<WaterTankerBookingViewProps> = ({ 
         <button
           type="button"
           onClick={() => setActiveTab('new')}
-          className={`min-h-[40px] rounded-[10px] text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
-            activeTab === 'new'
+          className={`min-h-[40px] rounded-[10px] text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${activeTab === 'new'
               ? 'bg-white dark:bg-neutral-800 text-[var(--mnp-primary)] shadow-sm'
               : 'text-[var(--mnp-text-muted)] hover:text-[var(--mnp-text)]'
-          }`}
+            }`}
         >
           <PlusCircle className="w-4 h-4" />
           <span>{language === 'hi' ? 'नया टैंकर अनुरोध' : 'New Request'}</span>
@@ -275,11 +274,10 @@ export const WaterTankerBookingView: React.FC<WaterTankerBookingViewProps> = ({ 
         <button
           type="button"
           onClick={() => setActiveTab('my_bookings')}
-          className={`min-h-[40px] rounded-[10px] text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
-            activeTab === 'my_bookings'
+          className={`min-h-[40px] rounded-[10px] text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${activeTab === 'my_bookings'
               ? 'bg-white dark:bg-neutral-800 text-[var(--mnp-primary)] shadow-sm'
               : 'text-[var(--mnp-text-muted)] hover:text-[var(--mnp-text)]'
-          }`}
+            }`}
         >
           <History className="w-4 h-4" />
           <span>
@@ -402,11 +400,10 @@ export const WaterTankerBookingView: React.FC<WaterTankerBookingViewProps> = ({ 
                     key={item.liters}
                     type="button"
                     onClick={() => setCapacity(item.liters)}
-                    className={`min-h-[78px] p-2 rounded-[12px] border text-center flex flex-col items-center justify-center gap-1 transition-all ${
-                      isSelected
+                    className={`min-h-[78px] p-2 rounded-[12px] border text-center flex flex-col items-center justify-center gap-1 transition-all ${isSelected
                         ? 'border-[var(--mnp-primary)] bg-[var(--mnp-primary-soft)] ring-2 ring-[var(--mnp-primary)] text-[var(--mnp-primary)] font-bold'
                         : 'border-[var(--mnp-border)] bg-[var(--mnp-surface)] text-[var(--mnp-text)] hover:border-[var(--mnp-primary)]'
-                    }`}
+                      }`}
                   >
                     <span className="text-xs font-extrabold">{item.labelHi}</span>
                     <span className="text-[10px] text-[var(--mnp-text-muted)] leading-tight">

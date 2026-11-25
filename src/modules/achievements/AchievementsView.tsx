@@ -62,7 +62,7 @@ export const AchievementsView: React.FC = () => {
               <Trophy className="w-5 h-5 text-amber-200" />
             </span>
             <span className="text-xs font-semibold uppercase tracking-wider bg-black/20 px-2.5 py-0.5 rounded-full border border-white/20">
-              {isHi ? 'नगर पालिका परिषद मैहर' : 'Nagar Palika Parishad Maihar'}
+              {isHi ? 'नगर पालिका परिषद मऊगंज' : 'Nagar Palika Parishad Mauganj'}
             </span>
           </div>
           <h1 className="text-lg font-bold leading-tight">
@@ -122,11 +122,10 @@ export const AchievementsView: React.FC = () => {
             key={opt.id}
             type="button"
             onClick={() => setSelectedCategory(opt.id)}
-            className={`px-3 py-1.5 rounded-full whitespace-nowrap font-medium transition-all ${
-              selectedCategory === opt.id
+            className={`px-3 py-1.5 rounded-full whitespace-nowrap font-medium transition-all ${selectedCategory === opt.id
                 ? 'bg-[var(--mnp-primary)] text-white shadow-xs font-semibold'
                 : 'bg-[var(--mnp-card-bg)] text-[var(--mnp-text)] border border-[var(--mnp-border)] hover:bg-[var(--mnp-hover)]'
-            }`}
+              }`}
           >
             {opt.label}
           </button>
@@ -153,22 +152,20 @@ export const AchievementsView: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => togglePhotoTab(item.id, 'before')}
-                      className={`px-2 py-0.5 text-[11px] font-semibold rounded ${
-                        currentTab === 'before'
+                      className={`px-2 py-0.5 text-[11px] font-semibold rounded ${currentTab === 'before'
                           ? 'bg-rose-600 text-white shadow-xs'
                           : 'text-zinc-300 hover:text-white'
-                      }`}
+                        }`}
                     >
                       {t.beforePhotoLabel}
                     </button>
                     <button
                       type="button"
                       onClick={() => togglePhotoTab(item.id, 'after')}
-                      className={`px-2 py-0.5 text-[11px] font-semibold rounded ${
-                        currentTab === 'after'
+                      className={`px-2 py-0.5 text-[11px] font-semibold rounded ${currentTab === 'after'
                           ? 'bg-emerald-600 text-white shadow-xs'
                           : 'text-zinc-300 hover:text-white'
-                      }`}
+                        }`}
                     >
                       {t.afterPhotoLabel}
                     </button>

@@ -1,7 +1,7 @@
 import { ComplaintStatus, EscalationLevel } from '../types';
 
 /**
- * Maihar Nagar Palika Seva — Clean Civic Design System Tokens
+ * Mauganj Nagar Palika Seva — Clean Civic Design System Tokens
  * Light, airy azure-blue Material style with floating white cards and high legibility.
  */
 

@@ -15,7 +15,7 @@ import {
   User,
 } from 'lucide-react';
 import { WARDS } from '../../constants';
-import { MaiharMap } from '../../components/MaiharMap';
+import { MauganjMap } from '../../components/MauganjMap';
 import { UI } from '../../theme/tokens';
 import { useApp } from '../../store/AppContext';
 
@@ -258,7 +258,7 @@ export const GarbageVanView: React.FC = () => {
             <span>AIS-140 GPS 99%</span>
           </span>
         </div>
-        <MaiharMap
+        <MauganjMap
           lang={language}
           routePoints={activeRoute.stops.map((s) => ({
             lat: s.lat,
@@ -386,7 +386,7 @@ export const GarbageVanView: React.FC = () => {
         </div>
 
         <a
-          href="tel:07674-000101"
+          href="tel:07663-000101"
           className="min-h-[38px] px-3 rounded-[10px] bg-[var(--mnp-primary)] text-white text-xs font-bold flex items-center gap-1.5 shrink-0 hover:bg-[var(--mnp-primary-hover)] active:scale-95 transition-all shadow-xs"
         >
           <Phone className="w-3.5 h-3.5" />

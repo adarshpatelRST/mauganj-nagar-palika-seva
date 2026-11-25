@@ -7,7 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(() => {
   return {
-    base: '/complaint-management-system-maihar/',
+    base: '/complaint-management-system-mauganj/',
     plugins: [
       react(),
       tailwindcss(),
@@ -21,16 +21,16 @@ export default defineConfig(() => {
           'pwa-maskable-512x512.png',
         ],
         manifest: {
-          id: '/complaint-management-system-maihar/',
-          name: 'Maihar Nagar Palika Seva',
-          short_name: 'Maihar Seva',
+          id: '/complaint-management-system-mauganj/',
+          name: 'Mauganj Nagar Palika Seva',
+          short_name: 'Mauganj Seva',
           description:
-            'Citizen and officer municipal services portal for Maihar Nagar Palika, Madhya Pradesh.',
+            'Citizen and officer municipal services portal for Mauganj Nagar Palika, Madhya Pradesh.',
           theme_color: '#2196F3',
           background_color: '#F6F8FB',
           display: 'standalone',
-          start_url: '/complaint-management-system-maihar/',
-          scope: '/complaint-management-system-maihar/',
+          start_url: '/complaint-management-system-mauganj/',
+          scope: '/complaint-management-system-mauganj/',
           icons: [
             {
               src: 'pwa-192x192.png',

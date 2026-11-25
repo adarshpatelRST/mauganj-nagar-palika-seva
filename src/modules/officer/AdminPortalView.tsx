@@ -494,7 +494,7 @@ export const AdminPortalView: React.FC = () => {
                 >
                   <option value="notice">{language === 'hi' ? 'सामान्य सूचना' : 'General Notice'}</option>
                   <option value="tender">{language === 'hi' ? 'निविदा (Tender)' : 'Tender'}</option>
-                  <option value="navratri">{language === 'hi' ? 'नवरात्रि / मंदिर सूचना' : 'Navratri / Temple'}</option>
+                  <option value="navratri">{language === 'hi' ? 'मेला / मंदिर सूचना' : 'Mela / Temple'}</option>
                 </select>
                 <input
                   type="text"
@@ -574,7 +574,7 @@ export const AdminPortalView: React.FC = () => {
       {/* TAB 3: REAL-TIME DATA FEEDS (Temple Crowd/Parking/Ropeway + Garbage Van Live Status) */}
       {tab === 'live_feeds' && (
         <div className="space-y-4">
-          {/* Maa Sharda Temple Live Feed */}
+          {/* Devtalab & Ashtabhuja Temple Live Feed */}
           <section className={`${UI.card} p-3.5 space-y-3`}>
             <h2 className={`${UI.sectionTitle} flex items-center gap-1.5`}>
               <Radio className="w-4 h-4 text-[var(--mnp-accent)]" />
@@ -816,7 +816,7 @@ export const AdminPortalView: React.FC = () => {
                       type="text"
                       value={ctPhone}
                       onChange={(e) => setCtPhone(e.target.value)}
-                      placeholder="07674-000399"
+                      placeholder="07663-000399"
                       className={UI.input}
                     />
                   </div>

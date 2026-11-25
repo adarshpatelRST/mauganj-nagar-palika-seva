@@ -44,8 +44,8 @@ import {
   JcbBooking,
 } from '../types';
 
-const STORAGE_KEY = 'maihar_nagar_palika_demo_v7';
-const LEGACY_STORAGE_KEY = 'maihar_nagar_palika_demo_v6';
+const STORAGE_KEY = 'mauganj_nagar_palika_demo_v7';
+const LEGACY_STORAGE_KEY = 'mauganj_nagar_palika_demo_v6';
 
 function normalizeComplaintPhoto(url?: string): string | undefined {
   if (!url) return url;
@@ -385,8 +385,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     pushNotification(
       'लॉगिन सफल (डेमो SMS)',
       'Login verified (Simulated SMS)',
-      `मैहर नगर पालिका सेवा में स्वागत है, ${found.name}।`,
-      `Welcome back to Maihar Nagar Palika Seva, ${found.name}.`,
+      `मऊगंज नगर पालिका सेवा में स्वागत है, ${found.name}।`,
+      `Welcome back to Mauganj Nagar Palika Seva, ${found.name}.`,
       'SMS',
       undefined,
       found.mobile
@@ -426,8 +426,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     pushNotification(
       'पंजीकरण सफल (डेमो SMS)',
       'Registration Complete (Simulated SMS)',
-      `मैहर नगर पालिका सेवा में आपका स्वागत है, ${cleanName}।`,
-      `Welcome to Maihar Nagar Palika Seva, ${cleanName}.`,
+      `मऊगंज नगर पालिका सेवा में आपका स्वागत है, ${cleanName}।`,
+      `Welcome to Mauganj Nagar Palika Seva, ${cleanName}.`,
       'SMS',
       undefined,
       cleaned
@@ -502,7 +502,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         const n = match ? parseInt(match[1], 10) : 0;
         return Math.max(max, n);
       }, 0) + 1;
-    const id = `MHR-2026-${String(nextNum).padStart(4, '0')}`;
+    const id = `MGJ-2026-${String(nextNum).padStart(4, '0')}`;
     const now = new Date().toISOString();
     const isAppIssue = input.category === 'app_issue';
     const assignedAdmin = isAppIssue ? 'emp-admin-1' : undefined;
@@ -799,7 +799,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       id,
       status: 'Approved',
       bookedAt: new Date().toISOString(),
-      vehicleNo: 'MP-19-WT-0244',
+      vehicleNo: 'MP-49-WT-0244',
       driverName: 'सुरेश कुमार कोल (चालक)',
       driverPhone: '9826022334',
     };
@@ -915,8 +915,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     pushNotification(
       'खोया-पाया रिपोर्ट दर्ज',
       'Lost & Found Report Logged',
-      'माँ शारदा मंदिर सहायता केंद्र में आपकी सूचना दर्ज हो गई है।',
-      'Your report has been logged with the Maa Sharda pilgrim helpdesk.',
+      'देवतलाब व अष्टभुजा मंदिर सहायता केंद्र में आपकी सूचना दर्ज हो गई है।',
+      'Your report has been logged with the Devtalab & Ashtabhuja pilgrim helpdesk.',
       'Push'
     );
   };

@@ -8,15 +8,15 @@ import potholeImg from '../assets/images/sample_road_pothole_1795151712181.jpg';
 import repairedRoadImg from '../assets/images/sample_road_repaired_1795151722341.jpg';
 import garbageImg from '../assets/images/sample_garbage_point_1795151713477.jpg';
 import cleanStreetImg from '../assets/images/sample_clean_street_1795151712072.jpg';
-import shardaTempleImg from '../assets/images/maihar_sharda_temple_1795168401598.jpg';
-import ghantagharImg from '../assets/images/maihar_ghantaghar_town_1795168386525.jpg';
-import heritageGardenImg from '../assets/images/maihar_heritage_garden_1795168386059.jpg';
-import maiharCleanStreetImg from '../assets/images/maihar_clean_street_1795168386862.jpg';
+import devtalabTempleImg from '../assets/images/mauganj_devtalab_temple.jpg';
+import townSquareImg from '../assets/images/mauganj_town_square.jpg';
+import heritageGardenImg from '../assets/images/mauganj_heritage_garden.jpg';
+import mauganjCleanStreetImg from '../assets/images/mauganj_clean_street.jpg';
 
-// Center coordinates of Maihar, Madhya Pradesh, India
-export const MAIHAR_CENTER = {
-  lat: 24.2655,
-  lng: 80.7585,
+// Center coordinates of Mauganj, Madhya Pradesh, India
+export const MAUGANJ_CENTER = {
+  lat: 24.6800,
+  lng: 81.8800,
 };
 
 // Demo OTP constant (REAL INTEGRATION NOTE: Replace with SMS OTP gateway e.g. NIC/MSG91/CDAC SMS service)
@@ -51,7 +51,7 @@ export const SAMPLE_APP_SCREENSHOTS = {
       <rect width="400" height="46" rx="16" fill="url(#topbar1)"/>
       <rect y="32" width="400" height="14" fill="url(#topbar1)"/>
       <circle cx="28" cy="23" r="9" fill="rgba(255,255,255,0.2)"/>
-      <text x="46" y="28" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700">मैहर सेवा · Maihar Nagar Palika</text>
+      <text x="46" y="28" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="700">मऊगंज सेवा · Mauganj Nagar Palika</text>
       <rect x="30" y="66" width="340" height="190" rx="14" fill="#ffffff"/>
       <circle cx="200" cy="106" r="22" fill="#fee2e2"/>
       <path d="M200 95v14M200 117v2" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
@@ -90,7 +90,7 @@ export const SAMPLE_APP_SCREENSHOTS = {
       <text x="200" y="152" text-anchor="middle" fill="#fef08a" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="800">मैप टाइल्स लोड नहीं हो सकीं (Map Loading Error)</text>
       <text x="200" y="172" text-anchor="middle" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10.5">GPS सिग्नल कनेक्शन त्रुटि · Code: ERR_MAPBOX_TIMEOUT</text>
       <rect x="65" y="186" width="270" height="20" rx="5" fill="#334155"/>
-      <text x="200" y="200" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Lat: 24.2655° N, Lng: 80.7585° E (Signal Offline)</text>
+      <text x="200" y="200" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Lat: 24.6800° N, Lng: 81.8800° E (Signal Offline)</text>
       <rect x="130" y="214" width="140" height="24" rx="6" fill="#f59e0b"/>
       <text x="200" y="230" text-anchor="middle" fill="#78350f" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="800">रिफ्रेश करें / Reload Map</text>
     </svg>`
@@ -102,13 +102,13 @@ export const MUNICIPAL_GALLERY = {
   repairedRoad: repairedRoadImg,
   garbage: garbageImg,
   cleanStreet: cleanStreetImg,
-  temple: shardaTempleImg,
-  ghantaghar: ghantagharImg,
+  temple: devtalabTempleImg,
+  townSquare: townSquareImg,
   heritageGarden: heritageGardenImg,
-  maiharCleanStreet: maiharCleanStreetImg,
+  mauganjCleanStreet: mauganjCleanStreetImg,
 };
 
-// Editable municipal wards of Maihar Nagar Palika
+// Editable municipal wards of Mauganj Nagar Palika
 export interface WardInfo {
   id: number;
   nameHi: string;
@@ -118,21 +118,21 @@ export interface WardInfo {
 }
 
 export const WARDS: WardInfo[] = [
-  { id: 1, nameHi: 'वार्ड 1 - शारदा देवी पहाड़ी मार्ग', nameEn: 'Ward 1 - Sharda Devi Hill Road', lat: 24.252, lng: 80.742 },
-  { id: 2, nameHi: 'वार्ड 2 - कटनी रोड', nameEn: 'Ward 2 - Katni Road', lat: 24.258, lng: 80.752 },
-  { id: 3, nameHi: 'वार्ड 3 - रेलवे स्टेशन क्षेत्र', nameEn: 'Ward 3 - Railway Station Area', lat: 24.263, lng: 80.768 },
-  { id: 4, nameHi: 'वार्ड 4 - घंटाघर मुख्य बाजार', nameEn: 'Ward 4 - Ghantaghar Main Market', lat: 24.266, lng: 80.758 },
-  { id: 5, nameHi: 'वार्ड 5 - सिविल लाइन', nameEn: 'Ward 5 - Civil Lines', lat: 24.271, lng: 80.755 },
-  { id: 6, nameHi: 'वार्ड 6 - अलाउद्दीन खाँ नगर', nameEn: 'Ward 6 - Alauddin Khan Nagar', lat: 24.269, lng: 80.762 },
-  { id: 7, nameHi: 'वार्ड 7 - पुराना बस स्टैंड', nameEn: 'Ward 7 - Old Bus Stand', lat: 24.264, lng: 80.754 },
-  { id: 8, nameHi: 'वार्ड 8 - देवी जी चौराहा', nameEn: 'Ward 8 - Devi Ji Square', lat: 24.256, lng: 80.748 },
-  { id: 9, nameHi: 'वार्ड 9 - सतना रोड', nameEn: 'Ward 9 - Satna Road', lat: 24.275, lng: 80.763 },
-  { id: 10, nameHi: 'वार्ड 10 - पटेहरा मोहल्ला', nameEn: 'Ward 10 - Patehra Mohalla', lat: 24.261, lng: 80.761 },
-  { id: 11, nameHi: 'वार्ड 11 - हरनामपुर', nameEn: 'Ward 11 - Harnampur', lat: 24.273, lng: 80.749 },
-  { id: 12, nameHi: 'वार्ड 12 - सरलानगर रोड', nameEn: 'Ward 12 - Sarlanagar Road', lat: 24.259, lng: 80.772 },
-  { id: 13, nameHi: 'वार्ड 13 - किला चौक', nameEn: 'Ward 13 - Qila Chowk', lat: 24.267, lng: 80.751 },
-  { id: 14, nameHi: 'वार्ड 14 - नई बस्ती', nameEn: 'Ward 14 - Nai Basti', lat: 24.277, lng: 80.758 },
-  { id: 15, nameHi: 'वार्ड 15 - बंधवा टोला', nameEn: 'Ward 15 - Bandhwa Tola', lat: 24.254, lng: 80.764 },
+  { id: 1, nameHi: 'वार्ड 1 - चाक रोड / एलआईसी क्षेत्र', nameEn: 'Ward 1 - Chak Road / LIC Area', lat: 24.677, lng: 81.874 },
+  { id: 2, nameHi: 'वार्ड 2 - रीवा रोड (NH-135)', nameEn: 'Ward 2 - Rewa Road (NH-135)', lat: 24.674, lng: 81.868 },
+  { id: 3, nameHi: 'वार्ड 3 - नगर पालिका एवं मुख्य बाजार', nameEn: 'Ward 3 - Nagar Palika & Main Market', lat: 24.680, lng: 81.879 },
+  { id: 4, nameHi: 'वार्ड 4 - छोटी बाजार', nameEn: 'Ward 4 - Chhoti Bazar', lat: 24.681, lng: 81.882 },
+  { id: 5, nameHi: 'वार्ड 5 - सिविल लाइन / कलेक्ट्रेट क्षेत्र', nameEn: 'Ward 5 - Civil Lines / Collectorate Area', lat: 24.686, lng: 81.876 },
+  { id: 6, nameHi: 'वार्ड 6 - घुरेहटा मोहल्ला', nameEn: 'Ward 6 - Ghurehata Mohalla', lat: 24.685, lng: 81.885 },
+  { id: 7, nameHi: 'वार्ड 7 - मऊगंज बस स्टैंड', nameEn: 'Ward 7 - Mauganj Bus Stand', lat: 24.679, lng: 81.877 },
+  { id: 8, nameHi: 'वार्ड 8 - भाटी मोड़ / सीधी रोड', nameEn: 'Ward 8 - Bhati Mod / Sidhi Road', lat: 24.671, lng: 81.883 },
+  { id: 9, nameHi: 'वार्ड 9 - हनुमना रोड (NH-135)', nameEn: 'Ward 9 - Hanumana Road (NH-135)', lat: 24.688, lng: 81.891 },
+  { id: 10, nameHi: 'वार्ड 10 - पटेरी मोहल्ला', nameEn: 'Ward 10 - Pateri Mohalla', lat: 24.676, lng: 81.886 },
+  { id: 11, nameHi: 'वार्ड 11 - कटरा रोड / कृषि मंडी', nameEn: 'Ward 11 - Katra Road / Krishi Mandi', lat: 24.689, lng: 81.872 },
+  { id: 12, nameHi: 'वार्ड 12 - देवतलाब रोड', nameEn: 'Ward 12 - Devtalab Road', lat: 24.673, lng: 81.892 },
+  { id: 13, nameHi: 'वार्ड 13 - पुरानी बस्ती', nameEn: 'Ward 13 - Purani Basti', lat: 24.683, lng: 81.873 },
+  { id: 14, nameHi: 'वार्ड 14 - नई बस्ती', nameEn: 'Ward 14 - Nai Basti', lat: 24.692, lng: 81.881 },
+  { id: 15, nameHi: 'वार्ड 15 - बजरंग नगर / गायत्री मंदिर क्षेत्र', nameEn: 'Ward 15 - Bajrang Nagar / Gayatri Mandir', lat: 24.669, lng: 81.876 },
 ];
 
 // Editable complaint categories and SLA durations (in hours)
@@ -341,18 +341,18 @@ export const HELPLINES: HelplineItem[] = [
     id: 'hl-police',
     titleHi: 'पुलिस सहायता',
     titleEn: 'Police Helpline',
-    subtitleHi: 'मैहर पुलिस नियंत्रण कक्ष (नमूना नंबर)',
-    subtitleEn: 'Maihar police control room (Sample number)',
+    subtitleHi: 'मऊगंज पुलिस नियंत्रण कक्ष (नमूना नंबर)',
+    subtitleEn: 'Mauganj police control room (Sample number)',
     sampleNumber: '1800-000-0100',
     category: 'police',
   },
   {
     id: 'hl-municipal',
-    titleHi: 'नगर पालिका मैहर कार्यालय',
+    titleHi: 'नगर पालिका मऊगंज कार्यालय',
     titleEn: 'Nagar Palika Office',
     subtitleHi: 'नागरिक सुविधा एवं शिकायत केंद्र (नमूना नंबर)',
     subtitleEn: 'Citizen desk & grievance cell (Sample number)',
-    sampleNumber: '07674-000-311',
+    sampleNumber: '07663-000-311',
     category: 'municipal',
   },
   {

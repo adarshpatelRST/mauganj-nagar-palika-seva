@@ -194,7 +194,7 @@ export const CmoDashboardView: React.FC<CmoDashboardViewProps> = ({ role = 'cmo'
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `maihar-${role}-complaints-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.download = `mauganj-${role}-complaints-${new Date().toISOString().slice(0, 10)}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -209,11 +209,10 @@ export const CmoDashboardView: React.FC<CmoDashboardViewProps> = ({ role = 'cmo'
         <button
           type="button"
           onClick={() => setActiveTab('analytics')}
-          className={`min-h-[44px] rounded-[8px] text-xs font-bold flex items-center justify-center gap-1.5 transition-colors ${
-            activeTab === 'analytics'
+          className={`min-h-[44px] rounded-[8px] text-xs font-bold flex items-center justify-center gap-1.5 transition-colors ${activeTab === 'analytics'
               ? 'bg-[var(--mnp-primary)] text-white'
               : 'text-[var(--mnp-text-secondary)] hover:bg-[var(--mnp-surface-muted)]'
-          }`}
+            }`}
         >
           <BarChart3 className="w-4 h-4" />
           <span>{t.analyticsTab}</span>
@@ -221,11 +220,10 @@ export const CmoDashboardView: React.FC<CmoDashboardViewProps> = ({ role = 'cmo'
         <button
           type="button"
           onClick={() => setActiveTab('requests')}
-          className={`min-h-[44px] rounded-[8px] text-xs font-bold flex items-center justify-center gap-1.5 transition-colors tabular-nums ${
-            activeTab === 'requests'
+          className={`min-h-[44px] rounded-[8px] text-xs font-bold flex items-center justify-center gap-1.5 transition-colors tabular-nums ${activeTab === 'requests'
               ? 'bg-[var(--mnp-primary)] text-white'
               : 'text-[var(--mnp-text-secondary)] hover:bg-[var(--mnp-surface-muted)]'
-          }`}
+            }`}
         >
           <ClipboardList className="w-4 h-4" />
           <span>

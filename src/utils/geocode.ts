@@ -1,4 +1,4 @@
-import { MAIHAR_CENTER, WARDS } from '../constants';
+import { MAUGANJ_CENTER, WARDS } from '../constants';
 import { Language } from '../types';
 import { haversineKm } from './format';
 
@@ -8,8 +8,8 @@ export interface GeocodeResult {
   cityOrTown: string;
   state: string;
   postcode?: string;
-  isMaiharRegion: boolean;
-  distanceFromMaiharKm: number;
+  isMauganjRegion: boolean;
+  distanceFromMauganjKm: number;
   nearestWardId: number;
   nearestWardNameHi: string;
   nearestWardNameEn: string;
@@ -24,8 +24,8 @@ export async function reverseGeocode(
   lng: number,
   lang: Language = 'hi'
 ): Promise<GeocodeResult> {
-  // 1. Calculate distance from Maihar center and find closest Maihar municipal ward
-  const distanceFromMaiharKm = haversineKm(lat, lng, MAIHAR_CENTER.lat, MAIHAR_CENTER.lng);
+  // 1. Calculate distance from Mauganj center and find closest Mauganj municipal ward
+  const distanceFromMauganjKm = haversineKm(lat, lng, MAUGANJ_CENTER.lat, MAUGANJ_CENTER.lng);
   let closestWard = WARDS[0];
   let minWardDistance = Infinity;
 
@@ -37,7 +37,7 @@ export async function reverseGeocode(
     }
   }
 
-  const isMaiharRegion = distanceFromMaiharKm <= 25;
+  const isMauganjRegion = distanceFromMauganjKm <= 25;
 
   let resolvedStreet = '';
   let resolvedCity = '';
@@ -146,8 +146,8 @@ export async function reverseGeocode(
         ? `GPS निर्देशांक: ${lat.toFixed(5)}° N, ${lng.toFixed(5)}° E`
         : `GPS Coordinates: ${lat.toFixed(5)}° N, ${lng.toFixed(5)}° E`;
     resolvedStreet = `GPS: ${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E`;
-    resolvedCity = isMaiharRegion ? 'Maihar' : '';
-    resolvedState = isMaiharRegion ? 'Madhya Pradesh' : '';
+    resolvedCity = isMauganjRegion ? 'Mauganj' : '';
+    resolvedState = isMauganjRegion ? 'Madhya Pradesh' : '';
   }
 
   return {
@@ -156,8 +156,8 @@ export async function reverseGeocode(
     cityOrTown: resolvedCity,
     state: resolvedState,
     postcode: resolvedPostcode,
-    isMaiharRegion,
-    distanceFromMaiharKm,
+    isMauganjRegion,
+    distanceFromMauganjKm,
     nearestWardId: closestWard.id,
     nearestWardNameHi: closestWard.nameHi,
     nearestWardNameEn: closestWard.nameEn,

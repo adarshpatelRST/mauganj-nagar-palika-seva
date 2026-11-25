@@ -299,7 +299,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           id="home-services-title"
           className="text-center text-[18px] font-bold text-[var(--mnp-primary)] tracking-tight"
         >
-          {language === 'hi' ? 'मैहर नगर सेवाएं' : 'Maihar Services'}
+          {language === 'hi' ? 'मऊगंज नगर सेवाएं' : 'Mauganj Services'}
         </h2>
 
         <div className="rounded-[24px] bg-[#2196F3] dark:bg-[#1565C0] p-3.5 shadow-md">

@@ -66,7 +66,7 @@ export const NewsView: React.FC = () => {
     const title = isHi ? item.titleHi : item.titleEn;
     const summary = isHi ? item.summaryHi : item.summaryEn;
     const dept = isHi ? item.sourceDeptHi : item.sourceDeptEn;
-    const shareText = `🏛️ *मैहर नगर पालिका समाचार अपडेट*\n📰 *${title}*\n\n${summary}\n\n📍 स्रोत: ${dept}\n📲 मैहर नगर पालिका सेवा ऐप`;
+    const shareText = `🏛️ *मऊगंज नगर पालिका समाचार अपडेट*\n📰 *${title}*\n\n${summary}\n\n📍 स्रोत: ${dept}\n📲 मऊगंज नगर पालिका सेवा ऐप`;
 
     if (navigator.share) {
       try {
@@ -176,11 +176,10 @@ export const NewsView: React.FC = () => {
             key={opt.id}
             type="button"
             onClick={() => setSelectedCategory(opt.id)}
-            className={`px-3 py-1.5 rounded-full whitespace-nowrap font-medium transition-all ${
-              selectedCategory === opt.id
+            className={`px-3 py-1.5 rounded-full whitespace-nowrap font-medium transition-all ${selectedCategory === opt.id
                 ? 'bg-[var(--mnp-primary)] text-white shadow-xs font-semibold'
                 : 'bg-[var(--mnp-card-bg)] text-[var(--mnp-text)] border border-[var(--mnp-border)] hover:bg-[var(--mnp-hover)]'
-            }`}
+              }`}
           >
             {opt.label}
           </button>

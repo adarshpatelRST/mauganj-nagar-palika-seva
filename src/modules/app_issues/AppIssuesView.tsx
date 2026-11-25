@@ -105,9 +105,9 @@ export const AppIssuesView: React.FC<AppIssuesViewProps> = ({
       const created = createComplaint({
         category: 'app_issue',
         ward: citizen.ward || 4,
-        landmark: 'मैहर सेवा मोबाइल ऐप (IT Admin Cell)',
-        lat: 24.2655,
-        lng: 80.7585,
+        landmark: 'मऊगंज सेवा मोबाइल ऐप (IT Admin Cell)',
+        lat: 24.6800,
+        lng: 81.8800,
         description: fullDescription,
         beforePhoto: screenshot,
       });
@@ -205,7 +205,7 @@ export const AppIssuesView: React.FC<AppIssuesViewProps> = ({
         </div>
         <p className="text-xs text-indigo-100 leading-relaxed">
           {language === 'hi'
-            ? 'मैहर नगर पालिका सेवा ऐप के उपयोग में आ रही तकनीकी दिक्कतों, बग अथवा सुझाव की सीधी शिकायत दर्ज करें। यह सीधे नगर पालिका IT व्यवस्थापक (Admin) को प्रेषित होगी।'
+            ? 'मऊगंज नगर पालिका सेवा ऐप के उपयोग में आ रही तकनीकी दिक्कतों, बग अथवा सुझाव की सीधी शिकायत दर्ज करें। यह सीधे नगर पालिका IT व्यवस्थापक (Admin) को प्रेषित होगी।'
             : 'Report technical bugs, login glitches, crashes or feedback directly to the Municipal IT Administrator for prompt resolution.'}
         </p>
       </div>

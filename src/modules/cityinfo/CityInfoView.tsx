@@ -17,7 +17,7 @@ import { formatDate } from '../../utils/format';
 export const CityInfoView: React.FC = () => {
   const { notices, contacts, wardDirectory, language, t, showToast } = useApp();
   const [tab, setTab] = useState<'contacts' | 'wards' | 'notices' | 'certs'>('contacts');
-  const [appId, setAppId] = useState('MHR-BC-2026-101');
+  const [appId, setAppId] = useState('MGJ-BC-2026-101');
   const [certResult, setCertResult] = useState<CertificateApplication | null>(null);
   const [certError, setCertError] = useState('');
 
@@ -46,11 +46,11 @@ export const CityInfoView: React.FC = () => {
     label: string;
     icon: React.ComponentType<{ className?: string }>;
   }[] = [
-    { id: 'contacts', label: t.tabContacts, icon: Building2 },
-    { id: 'wards', label: t.tabWards, icon: Users },
-    { id: 'notices', label: t.tabNotices, icon: FileText },
-    { id: 'certs', label: t.tabCertificates, icon: FileCheck },
-  ];
+      { id: 'contacts', label: t.tabContacts, icon: Building2 },
+      { id: 'wards', label: t.tabWards, icon: Users },
+      { id: 'notices', label: t.tabNotices, icon: FileText },
+      { id: 'certs', label: t.tabCertificates, icon: FileCheck },
+    ];
 
   return (
     <div className="p-3.5 space-y-3.5">

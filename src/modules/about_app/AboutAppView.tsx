@@ -46,7 +46,7 @@ export const AboutAppView: React.FC<AboutAppViewProps> = ({
 
         <div>
           <h2 className="text-lg font-bold text-[var(--mnp-text)]">
-            {language === 'hi' ? 'मैहर नगर पालिका सेवा' : 'Maihar Nagar Palika Seva'}
+            {language === 'hi' ? 'मऊगंज नगर पालिका सेवा' : 'Mauganj Nagar Palika Seva'}
           </h2>
           <p className="text-xs text-[var(--mnp-text-muted)] mt-0.5">
             {language === 'hi'
@@ -61,8 +61,8 @@ export const AboutAppView: React.FC<AboutAppViewProps> = ({
 
         <p className="text-xs text-[var(--mnp-text-secondary)] leading-relaxed pt-1">
           {language === 'hi'
-            ? 'कार्यालय नगर पालिका परिषद मैहर, जिला मैहर (मध्य प्रदेश) द्वारा नागरिकों एवं माँ शारदा देवी धाम के श्रद्धालुओं की सुविधा हेतु समर्पित डिजिटल ई-गवर्नेंस पहल।'
-            : 'A dedicated digital e-governance initiative by the Office of Maihar Nagar Palika Parishad, District Maihar, MP, serving citizens and Maa Sharda Devi pilgrims.'}
+            ? 'कार्यालय नगर पालिका परिषद मऊगंज, जिला मऊगंज (मध्य प्रदेश) द्वारा नागरिकों एवं देवतलाब व माँ अष्टभुजा धाम के श्रद्धालुओं की सुविधा हेतु समर्पित डिजिटल ई-गवर्नेंस पहल।'
+            : 'A dedicated digital e-governance initiative by the Office of Mauganj Nagar Palika Parishad, District Mauganj, MP, serving citizens and Devtalab & Maa Ashtabhuja pilgrims.'}
         </p>
       </div>
 
@@ -105,22 +105,22 @@ export const AboutAppView: React.FC<AboutAppViewProps> = ({
           <div className="flex justify-between items-center">
             <span className="text-[var(--mnp-text-muted)]">विभाग:</span>
             <span className="font-semibold text-[var(--mnp-text)]">
-              ई-गवर्नेंस एवं IT शाखा, नगर पालिका मैहर
+              ई-गवर्नेंस एवं IT शाखा, नगर पालिका मऊगंज
             </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-[var(--mnp-text-muted)]">कार्यालय पता:</span>
             <span className="font-medium text-[var(--mnp-text)] text-right">
-              पुराना बस स्टैंड मार्ग, मैहर (म.प्र.) - 485771
+              एलआईसी कार्यालय के पास, चाक रोड, मऊगंज (म.प्र.) - 486331
             </span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-[var(--mnp-text-muted)]">हेल्पलाइन:</span>
-            <span className="font-bold text-[var(--mnp-primary)]">07674-232044 / 1800-000-0101</span>
+            <span className="font-bold text-[var(--mnp-primary)]">07663-232044 / 1800-000-0101</span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-[var(--mnp-text-muted)]">आधिकारिक ईमेल:</span>
-            <span className="font-mono text-[var(--mnp-primary)]">it.nagarpalika-maihar@mp.gov.in</span>
+            <span className="font-mono text-[var(--mnp-primary)]">it.nagarpalika-mauganj@mp.gov.in</span>
           </div>
         </div>
       </div>

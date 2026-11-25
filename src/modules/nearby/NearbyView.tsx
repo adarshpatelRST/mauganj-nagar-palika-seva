@@ -7,8 +7,8 @@ import {
   Navigation,
   Phone,
 } from 'lucide-react';
-import { MAIHAR_CENTER, PLACE_TYPES, WARDS } from '../../constants';
-import { MaiharMap } from '../../components/MaiharMap';
+import { MAUGANJ_CENTER, PLACE_TYPES, WARDS } from '../../constants';
+import { MauganjMap } from '../../components/MauganjMap';
 import { SEED_PLACES } from '../../data/seedData';
 import { UI } from '../../theme/tokens';
 import { useApp } from '../../store/AppContext';
@@ -35,7 +35,7 @@ export const NearbyView: React.FC<NearbyViewProps> = ({ initialCategory = 'hospi
 
   const userOrigin = useMemo(() => {
     const wardObj = WARDS.find((w) => w.id === citizen.ward);
-    return wardObj ? { lat: wardObj.lat, lng: wardObj.lng } : MAIHAR_CENTER;
+    return wardObj ? { lat: wardObj.lat, lng: wardObj.lng } : MAUGANJ_CENTER;
   }, [citizen.ward]);
 
   const placesWithDistance = useMemo(() => {
@@ -78,11 +78,10 @@ export const NearbyView: React.FC<NearbyViewProps> = ({ initialCategory = 'hospi
           <button
             type="button"
             onClick={() => setViewMode('list')}
-            className={`min-h-[36px] px-3 rounded-full text-xs font-bold flex items-center gap-1.5 whitespace-nowrap transition-colors ${
-              viewMode === 'list'
+            className={`min-h-[36px] px-3 rounded-full text-xs font-bold flex items-center gap-1.5 whitespace-nowrap transition-colors ${viewMode === 'list'
                 ? 'bg-[var(--mnp-teal)] text-white'
                 : 'text-[var(--mnp-text-secondary)]'
-            }`}
+              }`}
           >
             <List className="w-3.5 h-3.5" />
             <span>{t.listView}</span>
@@ -90,11 +89,10 @@ export const NearbyView: React.FC<NearbyViewProps> = ({ initialCategory = 'hospi
           <button
             type="button"
             onClick={() => setViewMode('map')}
-            className={`min-h-[36px] px-3 rounded-full text-xs font-bold flex items-center gap-1.5 whitespace-nowrap transition-colors ${
-              viewMode === 'map'
+            className={`min-h-[36px] px-3 rounded-full text-xs font-bold flex items-center gap-1.5 whitespace-nowrap transition-colors ${viewMode === 'map'
                 ? 'bg-[var(--mnp-teal)] text-white'
                 : 'text-[var(--mnp-text-secondary)]'
-            }`}
+              }`}
           >
             <MapIcon className="w-3.5 h-3.5" />
             <span>{t.mapView}</span>
@@ -129,7 +127,7 @@ export const NearbyView: React.FC<NearbyViewProps> = ({ initialCategory = 'hospi
       {/* Map View */}
       {viewMode === 'map' && (
         <div className="space-y-3">
-          <MaiharMap
+          <MauganjMap
             lang={language}
             pins={placesWithDistance.map((p) => ({
               id: p.id,

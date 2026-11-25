@@ -1,6 +1,6 @@
 {
-  "name": "Maihar Nagar Palika Seva",
-  "description": "Mobile-first citizen and officer municipal services demo portal for Maihar, Madhya Pradesh, featuring grievance redressal, tax payments, nearby utilities, garbage van tracking, and pilgrim services.",
+  "name": "Mauganj Nagar Palika Seva",
+  "description": "Mobile-first citizen and officer municipal services demo portal for Mauganj, Madhya Pradesh, featuring grievance redressal, tax payments, nearby utilities, garbage van tracking, and pilgrim services.",
   "requestFramePermissions": ["geolocation", "camera"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

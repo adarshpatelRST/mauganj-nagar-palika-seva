@@ -21,10 +21,10 @@ import {
   UserPlus,
   Wrench,
 } from 'lucide-react';
-import shardaTempleImg from '../../assets/images/maihar_sharda_temple_1795168401598.jpg';
-import ghantagharImg from '../../assets/images/maihar_ghantaghar_town_1795168386525.jpg';
-import cleanStreetImg from '../../assets/images/maihar_clean_street_1795168386862.jpg';
-import heritageGardenImg from '../../assets/images/maihar_heritage_garden_1795168386059.jpg';
+import devtalabTempleImg from '../../assets/images/mauganj_devtalab_temple.jpg';
+import townSquareImg from '../../assets/images/mauganj_town_square.jpg';
+import cleanStreetImg from '../../assets/images/mauganj_clean_street.jpg';
+import heritageGardenImg from '../../assets/images/mauganj_heritage_garden.jpg';
 import { ICON_CIRCLE_THEMES, UI } from '../../theme/tokens';
 import { E_NAGARPALIKA_PORTAL_URL } from '../../constants';
 import { useApp } from '../../store/AppContext';
@@ -50,7 +50,7 @@ interface FrontPageViewProps {
   onRequireLogin: () => void;
 }
 
-const SLIDE_IMAGES = [shardaTempleImg, ghantagharImg, cleanStreetImg, heritageGardenImg];
+const SLIDE_IMAGES = [devtalabTempleImg, townSquareImg, cleanStreetImg, heritageGardenImg];
 
 export const FrontPageView: React.FC<FrontPageViewProps> = ({
   onOpenLogin,

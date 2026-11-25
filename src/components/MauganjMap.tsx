@@ -1,5 +1,5 @@
 import React from 'react';
-import { MAIHAR_CENTER } from '../constants';
+import { MAUGANJ_CENTER } from '../constants';
 import { Language } from '../types';
 
 // REAL INTEGRATION NOTE: Replace this lightweight offline-ready schematic SVG map
@@ -14,7 +14,7 @@ export interface MapPin {
   selected?: boolean;
 }
 
-interface MaiharMapProps {
+interface MauganjMapProps {
   lang: Language;
   pins?: MapPin[];
   onSelectPin?: (id: string) => void;
@@ -23,10 +23,10 @@ interface MaiharMapProps {
   heightClass?: string;
 }
 
-const MIN_LAT = 24.248;
-const MAX_LAT = 24.281;
-const MIN_LNG = 80.737;
-const MAX_LNG = 80.777;
+const MIN_LAT = 24.662;
+const MAX_LAT = 24.698;
+const MIN_LNG = 81.860;
+const MAX_LNG = 81.900;
 
 function project(lat: number, lng: number) {
   const x = ((lng - MIN_LNG) / (MAX_LNG - MIN_LNG)) * 340 + 10;
@@ -37,7 +37,7 @@ function project(lat: number, lng: number) {
   };
 }
 
-export const MaiharMap: React.FC<MaiharMapProps> = ({
+export const MauganjMap: React.FC<MauganjMapProps> = ({
   lang,
   pins = [],
   onSelectPin,
@@ -45,11 +45,12 @@ export const MaiharMap: React.FC<MaiharMapProps> = ({
   movingMarker,
   heightClass = 'h-60',
 }) => {
-  const centerPt = project(MAIHAR_CENTER.lat, MAIHAR_CENTER.lng);
-  const shardaPt = project(24.2515, 80.7415);
-  const stationPt = project(24.2631, 80.7689);
-  const satnaRoadPt = project(24.2775, 80.764);
-  const katniRoadPt = project(24.252, 80.752);
+  const centerPt = project(MAUGANJ_CENTER.lat, MAUGANJ_CENTER.lng);
+  const devtalabPt = project(24.668, 81.894);
+  const busStandPt = project(24.679, 81.877);
+  const hanumanaRoadPt = project(24.693, 81.895);
+  const rewaRoadPt = project(24.669, 81.864);
+  const sidhiRoadPt = project(24.665, 81.883);
 
   const routePath =
     routePoints && routePoints.length > 1
@@ -67,9 +68,9 @@ export const MaiharMap: React.FC<MaiharMapProps> = ({
     <div
       className={`relative w-full ${heightClass} rounded-[12px] border border-[var(--mnp-border)] shadow-[var(--mnp-shadow-card)] overflow-hidden bg-[#EAF0F6] dark:bg-[#101A26] select-none`}
     >
-      <svg viewBox="0 0 360 240" className="w-full h-full" role="img" aria-label="Maihar town map">
+      <svg viewBox="0 0 360 240" className="w-full h-full" role="img" aria-label="Mauganj town map">
         <defs>
-          <pattern id="maiharGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+          <pattern id="mauganjGrid" width="30" height="30" patternUnits="userSpaceOnUse">
             <path
               d="M 30 0 L 0 0 0 30"
               fill="none"
@@ -79,54 +80,57 @@ export const MaiharMap: React.FC<MaiharMapProps> = ({
             />
           </pattern>
         </defs>
-        <rect width="360" height="240" fill="url(#maiharGrid)" />
+        <rect width="360" height="240" fill="url(#mauganjGrid)" />
 
         <ellipse
-          cx={shardaPt.x}
-          cy={shardaPt.y}
-          rx="42"
+          cx={devtalabPt.x}
+          cy={devtalabPt.y}
+          rx="44"
           ry="24"
           className="fill-[#FFF1E6] dark:fill-[#351D0E] stroke-[#E86A17]/60"
           strokeWidth="1"
         />
         <text
-          x={shardaPt.x}
-          y={shardaPt.y + 3}
+          x={devtalabPt.x}
+          y={devtalabPt.y + 3}
           textAnchor="middle"
-          className="fill-[#9A3412] dark:fill-[#FDBA74] text-[8px] font-bold"
+          className="fill-[#9A3412] dark:fill-[#FDBA74] text-[7.5px] font-bold"
         >
-          {lang === 'hi' ? 'माँ शारदा पर्वत' : 'Maa Sharda Hill'}
+          {lang === 'hi' ? 'देवतलाब मार्ग' : 'Devtalab Rd'}
         </text>
 
+        {/* NH-135 Rewa Road <-> Mauganj <-> Hanumana Road */}
         <path
-          d={`M ${katniRoadPt.x} 238 L ${centerPt.x} ${centerPt.y} L ${satnaRoadPt.x} 8`}
+          d={`M ${rewaRoadPt.x} 230 L ${centerPt.x} ${centerPt.y} L ${hanumanaRoadPt.x} 10`}
           fill="none"
           className="stroke-white dark:stroke-slate-700"
           strokeWidth="6.5"
           strokeLinecap="round"
         />
+        {/* Sidhi Road & Chak Road connector */}
         <path
-          d={`M ${shardaPt.x + 12} ${shardaPt.y - 6} L ${centerPt.x} ${centerPt.y} L ${stationPt.x} ${stationPt.y}`}
+          d={`M ${sidhiRoadPt.x} 236 L ${centerPt.x} ${centerPt.y} L ${devtalabPt.x - 10} ${devtalabPt.y}`}
           fill="none"
           className="stroke-white dark:stroke-slate-700"
           strokeWidth="4.5"
           strokeLinecap="round"
         />
 
+        {/* NH-135 Marker Line */}
         <path
-          d={`M ${stationPt.x + 25} 10 L ${stationPt.x + 8} ${stationPt.y} L ${stationPt.x - 10} 235`}
+          d={`M 18 220 L ${busStandPt.x} ${busStandPt.y} L 342 18`}
           fill="none"
-          className="stroke-slate-400 dark:stroke-slate-600"
-          strokeWidth="1.8"
+          className="stroke-slate-400/50 dark:stroke-slate-600/60"
+          strokeWidth="1.4"
           strokeDasharray="4 4"
         />
         <text
-          x={stationPt.x - 6}
-          y={stationPt.y - 10}
+          x={busStandPt.x - 10}
+          y={busStandPt.y + 14}
           textAnchor="end"
           className="fill-slate-600 dark:fill-slate-400 text-[7.5px] font-semibold"
         >
-          {lang === 'hi' ? 'रेलवे स्टेशन' : 'Railway Stn'}
+          {lang === 'hi' ? 'बस स्टैंड' : 'Bus Stand'}
         </text>
 
         <text
@@ -135,7 +139,7 @@ export const MaiharMap: React.FC<MaiharMapProps> = ({
           textAnchor="middle"
           className="fill-slate-700 dark:fill-slate-300 text-[8px] font-bold"
         >
-          {lang === 'hi' ? 'घंटाघर चौक' : 'Ghantaghar'}
+          {lang === 'hi' ? 'छोटी बाजार चौक' : 'Chhoti Bazar'}
         </text>
 
         {routePath && (
@@ -229,7 +233,7 @@ export const MaiharMap: React.FC<MaiharMapProps> = ({
       </svg>
 
       <div className="absolute bottom-1.5 right-2 bg-[var(--mnp-surface)]/95 px-2 py-0.5 rounded-[6px] border border-[var(--mnp-border)] text-[10px] font-semibold text-[var(--mnp-text-secondary)]">
-        {lang === 'hi' ? 'मैहर नगर मानचित्र (नमूना)' : 'Maihar Schematic Map (Sample)'}
+        {lang === 'hi' ? 'मऊगंज नगर मानचित्र (नमूना)' : 'Mauganj Schematic Map (Sample)'}
       </div>
     </div>
   );

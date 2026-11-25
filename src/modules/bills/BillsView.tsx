@@ -22,7 +22,7 @@ import { E_NAGARPALIKA_PORTAL_URL } from '../../constants';
 export const BillsView: React.FC = () => {
   const { taxAccounts, payments, language, t } = useApp();
   const [taxType, setTaxType] = useState<'property' | 'water'>('property');
-  const [propertyId, setPropertyId] = useState('MHR-P-1001');
+  const [propertyId, setPropertyId] = useState('MGJ-P-1001');
   const [fetchedId, setFetchedId] = useState<string | null>(null);
   const [payMethod, setPayMethod] = useState<'UPI' | 'Card'>('UPI');
   const [upiId, setUpiId] = useState('citizen@upi');
@@ -80,8 +80,8 @@ export const BillsView: React.FC = () => {
         </div>
         <p className="text-xs text-blue-100 leading-relaxed">
           {language === 'hi'
-            ? 'मैहर नगर पालिका के संपत्ति कर एवं जल कर का ऑनलाइन भुगतान मध्य प्रदेश शासन के आधिकारिक ई-नगरपालिका पोर्टल पर होता है।'
-            : 'Online payment of property tax and water tax for Maihar Nagar Palika is processed on the Government of MP e-Nagarpalika portal.'}
+            ? 'मऊगंज नगर पालिका के संपत्ति कर एवं जल कर का ऑनलाइन भुगतान मध्य प्रदेश शासन के आधिकारिक ई-नगरपालिका पोर्टल पर होता है।'
+            : 'Online payment of property tax and water tax for Mauganj Nagar Palika is processed on the Government of MP e-Nagarpalika portal.'}
         </p>
         <button
           type="button"
@@ -103,11 +103,10 @@ export const BillsView: React.FC = () => {
             setReceipt(null);
             setError('');
           }}
-          className={`min-h-[54px] px-3 rounded-[12px] border text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-[var(--mnp-shadow-card)] ${
-            taxType === 'property'
+          className={`min-h-[54px] px-3 rounded-[12px] border text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-[var(--mnp-shadow-card)] ${taxType === 'property'
               ? 'bg-[var(--mnp-primary)] text-white border-[var(--mnp-primary)]'
               : 'bg-[var(--mnp-surface)] text-[var(--mnp-text)] border-[var(--mnp-border)]'
-          }`}
+            }`}
         >
           <Home className="w-4 h-4 shrink-0" />
           <span>{t.propertyTax}</span>
@@ -120,11 +119,10 @@ export const BillsView: React.FC = () => {
             setReceipt(null);
             setError('');
           }}
-          className={`min-h-[54px] px-3 rounded-[12px] border text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-[var(--mnp-shadow-card)] ${
-            taxType === 'water'
+          className={`min-h-[54px] px-3 rounded-[12px] border text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-[var(--mnp-shadow-card)] ${taxType === 'water'
               ? 'bg-[var(--mnp-primary)] text-white border-[var(--mnp-primary)]'
               : 'bg-[var(--mnp-surface)] text-[var(--mnp-text)] border-[var(--mnp-border)]'
-          }`}
+            }`}
         >
           <Droplets className="w-4 h-4 shrink-0" />
           <span>{t.waterTax}</span>
@@ -286,11 +284,10 @@ export const BillsView: React.FC = () => {
                         setPayMethod('UPI');
                         setError('');
                       }}
-                      className={`min-h-[48px] px-3 rounded-[10px] border text-xs font-bold flex items-center justify-center gap-1.5 ${
-                        payMethod === 'UPI'
+                      className={`min-h-[48px] px-3 rounded-[10px] border text-xs font-bold flex items-center justify-center gap-1.5 ${payMethod === 'UPI'
                           ? 'border-[var(--mnp-primary)] bg-[var(--mnp-primary-soft)] text-[var(--mnp-primary)] ring-1 ring-[var(--mnp-primary)]'
                           : 'border-[var(--mnp-border-strong)] text-[var(--mnp-text-secondary)]'
-                      }`}
+                        }`}
                     >
                       <Smartphone className="w-4 h-4" />
                       <span>{t.payViaUpi}</span>
@@ -301,11 +298,10 @@ export const BillsView: React.FC = () => {
                         setPayMethod('Card');
                         setError('');
                       }}
-                      className={`min-h-[48px] px-3 rounded-[10px] border text-xs font-bold flex items-center justify-center gap-1.5 ${
-                        payMethod === 'Card'
+                      className={`min-h-[48px] px-3 rounded-[10px] border text-xs font-bold flex items-center justify-center gap-1.5 ${payMethod === 'Card'
                           ? 'border-[var(--mnp-primary)] bg-[var(--mnp-primary-soft)] text-[var(--mnp-primary)] ring-1 ring-[var(--mnp-primary)]'
                           : 'border-[var(--mnp-border-strong)] text-[var(--mnp-text-secondary)]'
-                      }`}
+                        }`}
                     >
                       <CreditCard className="w-4 h-4" />
                       <span>{t.payViaCard}</span>
