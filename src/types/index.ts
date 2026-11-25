@@ -24,16 +24,23 @@ export type CitizenScreen =
   | 'faq'
   | 'terms'
   | 'privacy'
-  | 'auth';
+  | 'app_issues'
+  | 'about_app'
+  | 'achievements'
+  | 'news'
+  | 'tanker_booking'
+  | 'jcb_booking';
 
 export type ComplaintCategoryId =
   | 'water'
+  | 'handpump'
   | 'streetlight'
   | 'sanitation'
   | 'roads'
   | 'drainage'
   | 'cattle'
-  | 'other';
+  | 'other'
+  | 'app_issue';
 
 export type ComplaintStatus =
   | 'Registered'
@@ -296,4 +303,91 @@ export interface HelplineItem {
   subtitleEn: string;
   sampleNumber: string;
   category: 'fire' | 'ambulance' | 'police' | 'municipal' | 'women' | 'electricity';
+}
+
+export interface AchievementItem {
+  id: string;
+  titleHi: string;
+  titleEn: string;
+  category: 'roads' | 'sanitation' | 'water' | 'pilgrim' | 'beautification' | 'energy';
+  categoryLabelHi: string;
+  categoryLabelEn: string;
+  descriptionHi: string;
+  descriptionEn: string;
+  completionDate: string;
+  ward?: number;
+  wardNameHi?: string;
+  wardNameEn?: string;
+  budget?: string;
+  keyMetric?: {
+    value: string;
+    labelHi: string;
+    labelEn: string;
+  };
+  photoBefore?: string;
+  photoAfter?: string;
+  photo?: string;
+  statusBadgeHi: string;
+  statusBadgeEn: string;
+}
+
+export interface NewsItem {
+  id: string;
+  titleHi: string;
+  titleEn: string;
+  category: 'announcement' | 'sanitation' | 'water' | 'temple' | 'civic' | 'alert';
+  categoryLabelHi: string;
+  categoryLabelEn: string;
+  date: string;
+  timeHi: string;
+  timeEn: string;
+  isToday: boolean;
+  isBreaking?: boolean;
+  summaryHi: string;
+  summaryEn: string;
+  contentHi: string;
+  contentEn: string;
+  sourceDeptHi: string;
+  sourceDeptEn: string;
+  photo?: string;
+}
+
+export interface WaterTankerBooking {
+  id: string; // e.g. 'WT-2026-0001'
+  citizenMobile: string;
+  citizenName: string;
+  ward: number;
+  deliveryAddress: string;
+  lat: number;
+  lng: number;
+  deliveryDate: string;
+  deliverySlot: 'morning' | 'afternoon' | 'evening';
+  capacityLiters: number; // 3000 | 5000 | 10000
+  purpose: string;
+  remarks?: string;
+  status: 'Pending' | 'Approved' | 'Dispatched' | 'Delivered' | 'Cancelled';
+  bookedAt: string;
+  vehicleNo?: string;
+  driverName?: string;
+  driverPhone?: string;
+}
+
+export interface JcbBooking {
+  id: string; // e.g. 'JCB-2026-0001'
+  citizenMobile: string;
+  citizenName: string;
+  ward: number;
+  worksiteAddress: string;
+  lat: number;
+  lng: number;
+  bookingDate: string;
+  shift: 'morning' | 'afternoon' | 'fullday';
+  machineryType: 'backhoe_loader' | 'mini_excavator' | 'tipper_dumper';
+  workType: string;
+  durationHours: number;
+  remarks?: string;
+  status: 'Pending' | 'Approved' | 'Dispatched' | 'Completed' | 'Cancelled';
+  bookedAt: string;
+  operatorName?: string;
+  operatorPhone?: string;
 }

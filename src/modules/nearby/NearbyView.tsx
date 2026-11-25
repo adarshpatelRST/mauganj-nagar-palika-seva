@@ -7,8 +7,8 @@ import {
   Navigation,
   Phone,
 } from 'lucide-react';
-import { MAUGANG_CENTER, PLACE_TYPES, WARDS } from '../../constants';
-import { MaugangMap } from '../../components/MaugangMap';
+import { MAIHAR_CENTER, PLACE_TYPES, WARDS } from '../../constants';
+import { MaiharMap } from '../../components/MaiharMap';
 import { SEED_PLACES } from '../../data/seedData';
 import { UI } from '../../theme/tokens';
 import { useApp } from '../../store/AppContext';
@@ -35,7 +35,7 @@ export const NearbyView: React.FC<NearbyViewProps> = ({ initialCategory = 'hospi
 
   const userOrigin = useMemo(() => {
     const wardObj = WARDS.find((w) => w.id === citizen.ward);
-    return wardObj ? { lat: wardObj.lat, lng: wardObj.lng } : MAUGANG_CENTER;
+    return wardObj ? { lat: wardObj.lat, lng: wardObj.lng } : MAIHAR_CENTER;
   }, [citizen.ward]);
 
   const placesWithDistance = useMemo(() => {
@@ -129,7 +129,7 @@ export const NearbyView: React.FC<NearbyViewProps> = ({ initialCategory = 'hospi
       {/* Map View */}
       {viewMode === 'map' && (
         <div className="space-y-3">
-          <MaugangMap
+          <MaiharMap
             lang={language}
             pins={placesWithDistance.map((p) => ({
               id: p.id,

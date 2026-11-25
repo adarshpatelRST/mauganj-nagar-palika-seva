@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { HELPLINES } from '../constants';
+import { HELPLINES, SAMPLE_PHOTOS } from '../constants';
 import {
   createSeedComplaints,
   createSeedNotifications,
@@ -16,6 +16,8 @@ import {
   SEED_TAX_ACCOUNTS,
   SEED_TEMPLE_FEED,
   SEED_WARD_DIRECTORY,
+  SEED_WATER_TANKER_BOOKINGS,
+  SEED_JCB_BOOKINGS,
 } from '../data/seedData';
 import { TRANSLATIONS, Translations } from '../translations';
 import {
@@ -25,6 +27,7 @@ import {
   CitizenProfile,
   Complaint,
   ComplaintCategoryId,
+  ComplaintStatus,
   Contact,
   Employee,
   HelplineItem,
@@ -37,9 +40,21 @@ import {
   TaxAccount,
   TempleLiveFeed,
   WardDirectoryEntry,
+  WaterTankerBooking,
+  JcbBooking,
 } from '../types';
 
-const STORAGE_KEY = 'maugang_nagar_palika_demo_v1';
+const STORAGE_KEY = 'maihar_nagar_palika_demo_v7';
+const LEGACY_STORAGE_KEY = 'maihar_nagar_palika_demo_v6';
+
+function normalizeComplaintPhoto(url?: string): string | undefined {
+  if (!url) return url;
+  if (url.includes('sample_road_pothole')) return SAMPLE_PHOTOS.pothole;
+  if (url.includes('sample_road_repaired')) return SAMPLE_PHOTOS.repairedRoad;
+  if (url.includes('sample_garbage_point')) return SAMPLE_PHOTOS.garbage;
+  if (url.includes('sample_clean_street')) return SAMPLE_PHOTOS.cleanStreet;
+  return url;
+}
 
 interface PersistedState {
   language: Language;
@@ -62,6 +77,8 @@ interface PersistedState {
   garbageRoutes: Route[];
   templeFeed: TempleLiveFeed;
   helplines: HelplineItem[];
+  waterTankerBookings: WaterTankerBooking[];
+  jcbBookings: JcbBooking[];
 }
 
 function buildInitialState(): PersistedState {
@@ -92,12 +109,14 @@ function buildInitialState(): PersistedState {
     garbageRoutes: SEED_GARBAGE_ROUTES.map((r) => ({ ...r, status: r.status || 'on_route' })),
     templeFeed: SEED_TEMPLE_FEED,
     helplines: HELPLINES,
+    waterTankerBookings: SEED_WATER_TANKER_BOOKINGS,
+    jcbBookings: SEED_JCB_BOOKINGS,
   };
 }
 
 function loadState(): PersistedState {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
     if (!raw) return buildInitialState();
     const parsed = JSON.parse(raw) as Partial<PersistedState>;
     const fallback = buildInitialState();
@@ -115,7 +134,11 @@ function loadState(): PersistedState {
           : fallback.employees,
       complaints:
         Array.isArray(parsed.complaints) && parsed.complaints.length > 0
-          ? parsed.complaints
+          ? parsed.complaints.map((c) => ({
+            ...c,
+            beforePhoto: normalizeComplaintPhoto(c.beforePhoto),
+            afterPhoto: normalizeComplaintPhoto(c.afterPhoto),
+          }))
           : fallback.complaints,
       taxAccounts:
         Array.isArray(parsed.taxAccounts) && parsed.taxAccounts.length > 0
@@ -149,6 +172,14 @@ function loadState(): PersistedState {
         Array.isArray(parsed.helplines) && parsed.helplines.length > 0
           ? parsed.helplines
           : fallback.helplines,
+      waterTankerBookings:
+        Array.isArray(parsed.waterTankerBookings) && parsed.waterTankerBookings.length > 0
+          ? parsed.waterTankerBookings
+          : fallback.waterTankerBookings,
+      jcbBookings:
+        Array.isArray(parsed.jcbBookings) && parsed.jcbBookings.length > 0
+          ? parsed.jcbBookings
+          : fallback.jcbBookings,
     };
   } catch {
     return buildInitialState();
@@ -181,6 +212,14 @@ interface AppContextValue extends PersistedState {
   completeOnboarding: (mobile: string, name: string, ward: number) => void;
   signOutCitizen: () => void;
   updateCitizenWard: (ward: number) => void;
+
+  // Bookings (Water Tanker & JCB)
+  bookWaterTanker: (
+    booking: Omit<WaterTankerBooking, 'id' | 'bookedAt' | 'status'>
+  ) => WaterTankerBooking;
+  bookJcb: (
+    booking: Omit<JcbBooking, 'id' | 'bookedAt' | 'status'>
+  ) => JcbBooking;
 
   // Employee Auth
   loginEmployee: (
@@ -346,8 +385,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     pushNotification(
       'लॉगिन सफल (डेमो SMS)',
       'Login verified (Simulated SMS)',
-      `मऊगंज नगर पालिका सेवा में स्वागत है, ${found.name}।`,
-      `Welcome back to Maugang Nagar Palika Seva, ${found.name}.`,
+      `मैहर नगर पालिका सेवा में स्वागत है, ${found.name}।`,
+      `Welcome back to Maihar Nagar Palika Seva, ${found.name}.`,
       'SMS',
       undefined,
       found.mobile
@@ -362,17 +401,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const exists = prev.citizens.some((c) => c.mobile === cleaned);
       const nextCitizens = exists
         ? prev.citizens.map((c) =>
-            c.mobile === cleaned ? { ...c, name: cleanName, ward } : c
-          )
+          c.mobile === cleaned ? { ...c, name: cleanName, ward } : c
+        )
         : [
-            ...prev.citizens,
-            {
-              mobile: cleaned,
-              name: cleanName,
-              ward,
-              registeredAt: new Date().toISOString(),
-            },
-          ];
+          ...prev.citizens,
+          {
+            mobile: cleaned,
+            name: cleanName,
+            ward,
+            registeredAt: new Date().toISOString(),
+          },
+        ];
       return {
         ...prev,
         citizens: nextCitizens,
@@ -387,8 +426,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     pushNotification(
       'पंजीकरण सफल (डेमो SMS)',
       'Registration Complete (Simulated SMS)',
-      `मऊगंज नगर पालिका सेवा में आपका स्वागत है, ${cleanName}।`,
-      `Welcome to Maugang Nagar Palika Seva, ${cleanName}.`,
+      `मैहर नगर पालिका सेवा में आपका स्वागत है, ${cleanName}।`,
+      `Welcome to Maihar Nagar Palika Seva, ${cleanName}.`,
       'SMS',
       undefined,
       cleaned
@@ -463,8 +502,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         const n = match ? parseInt(match[1], 10) : 0;
         return Math.max(max, n);
       }, 0) + 1;
-    const id = `MUG-2026-${String(nextNum).padStart(4, '0')}`;
+    const id = `MHR-2026-${String(nextNum).padStart(4, '0')}`;
     const now = new Date().toISOString();
+    const isAppIssue = input.category === 'app_issue';
+    const assignedAdmin = isAppIssue ? 'emp-admin-1' : undefined;
+    const initialStatus: ComplaintStatus = isAppIssue ? 'Assigned' : 'Registered';
     const newComplaint: Complaint = {
       id,
       mobile: state.citizen.mobile,
@@ -477,13 +519,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       description: input.description?.trim() || undefined,
       beforePhoto: input.beforePhoto,
       createdAt: now,
-      status: 'Registered',
+      status: initialStatus,
+      assignedTo: assignedAdmin,
       history: [
         {
           time: now,
-          status: 'Registered',
-          note:
-            state.language === 'hi'
+          status: initialStatus,
+          note: isAppIssue
+            ? state.language === 'hi'
+              ? 'ऐप संबंधित समस्या सीधे नगर पालिका IT व्यवस्थापक (Admin: संजय कुमार दुबे) को सौंपी गई।'
+              : 'App issue assigned directly to Municipal IT Administrator (Admin: Sanjay Kumar Dubey).'
+            : state.language === 'hi'
               ? 'नागरिक द्वारा ऐप के माध्यम से शिकायत दर्ज की गई।'
               : 'Complaint registered via citizen portal.',
           by: state.citizen.name,
@@ -495,10 +541,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       complaints: [newComplaint, ...prev.complaints],
     }));
     pushNotification(
-      `शिकायत ${id} दर्ज हुई`,
-      `Complaint ${id} Registered`,
-      `आपकी शिकायत वार्ड ${input.ward} हेतु सफलतापूर्वक दर्ज की गई है।`,
-      `Your grievance for Ward ${input.ward} has been logged.`,
+      isAppIssue ? `ऐप समस्या ${id} दर्ज हुई` : `शिकायत ${id} दर्ज हुई`,
+      isAppIssue ? `App Issue ${id} Reported` : `Complaint ${id} Registered`,
+      isAppIssue
+        ? `आपकी ऐप संबंधी शिकायत सीधे नगर पालिका IT व्यवस्थापक (Admin) को प्रेषित कर दी गई है।`
+        : `आपकी शिकायत वार्ड ${input.ward} हेतु सफलतापूर्वक दर्ज की गई है।`,
+      isAppIssue
+        ? `Your app issue has been routed directly to the Municipal Admin.`
+        : `Your grievance for Ward ${input.ward} has been logged.`,
       'SMS',
       id,
       state.citizen.mobile
@@ -543,8 +593,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           note && note.trim()
             ? `${staffLabel} को सौंपी गई: ${note.trim()}`
             : isReassign
-            ? `${staffLabel} को पुनः सौंपी गई।`
-            : `${staffLabel} को निराकरण हेतु सौंपी गई।`;
+              ? `${staffLabel} को पुनः सौंपी गई।`
+              : `${staffLabel} को निराकरण हेतु सौंपी गई।`;
         return {
           ...c,
           assignedTo: staffId,
@@ -737,6 +787,79 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     );
   };
 
+  const bookWaterTanker: AppContextValue['bookWaterTanker'] = (booking) => {
+    const nextNum =
+      state.waterTankerBookings.reduce((max, b) => {
+        const m = b.id.match(/(\d+)$/);
+        return Math.max(max, m ? parseInt(m[1], 10) : 0);
+      }, 0) + 1;
+    const id = `WT-2026-${String(nextNum).padStart(4, '0')}`;
+    const newBooking: WaterTankerBooking = {
+      ...booking,
+      id,
+      status: 'Approved',
+      bookedAt: new Date().toISOString(),
+      vehicleNo: 'MP-19-WT-0244',
+      driverName: 'सुरेश कुमार कोल (चालक)',
+      driverPhone: '9826022334',
+    };
+    setState((prev) => ({
+      ...prev,
+      waterTankerBookings: [newBooking, ...prev.waterTankerBookings],
+    }));
+    pushNotification(
+      `पानी टैंकर बुकिंग ${id} स्वीकृत`,
+      `Water Tanker Booking ${id} Confirmed`,
+      `वार्ड ${booking.ward} के लिए ${booking.capacityLiters}L पानी टैंकर अनुरोध दर्ज हुआ।`,
+      `Water tanker (${booking.capacityLiters}L) confirmed for Ward ${booking.ward}.`,
+      'SMS',
+      undefined,
+      booking.citizenMobile
+    );
+    showToast(
+      state.language === 'hi' ? 'पानी टैंकर बुकिंग सफल' : 'Water Tanker Booked',
+      `बुकिंग संदर्भ: ${id}`,
+      'Info'
+    );
+    return newBooking;
+  };
+
+  const bookJcb: AppContextValue['bookJcb'] = (booking) => {
+    const nextNum =
+      state.jcbBookings.reduce((max, b) => {
+        const m = b.id.match(/(\d+)$/);
+        return Math.max(max, m ? parseInt(m[1], 10) : 0);
+      }, 0) + 1;
+    const id = `JCB-2026-${String(nextNum).padStart(4, '0')}`;
+    const newBooking: JcbBooking = {
+      ...booking,
+      id,
+      status: 'Approved',
+      bookedAt: new Date().toISOString(),
+      operatorName: 'राजेंद्र सिंह (JCB ऑपरेटर)',
+      operatorPhone: '9826033445',
+    };
+    setState((prev) => ({
+      ...prev,
+      jcbBookings: [newBooking, ...prev.jcbBookings],
+    }));
+    pushNotification(
+      `जेसीबी बुकिंग ${id} स्वीकृत`,
+      `JCB Machinery Booking ${id} Confirmed`,
+      `${booking.workType} हेतु जेसीबी सेवा अनुरोध स्वीकृत कर लिया गया है।`,
+      `JCB service request confirmed for ${booking.workType}.`,
+      'SMS',
+      undefined,
+      booking.citizenMobile
+    );
+    showToast(
+      state.language === 'hi' ? 'जेसीबी बुकिंग सफल' : 'JCB Booking Confirmed',
+      `बुकिंग संदर्भ: ${id}`,
+      'Info'
+    );
+    return newBooking;
+  };
+
   const payTaxBill: AppContextValue['payTaxBill'] = (propertyId, taxType, method) => {
     const acct = state.taxAccounts.find(
       (a) => a.propertyId.toUpperCase() === propertyId.trim().toUpperCase()
@@ -792,8 +915,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     pushNotification(
       'खोया-पाया रिपोर्ट दर्ज',
       'Lost & Found Report Logged',
-      'श्री देवतालाब शिव मंदिर सहायता केंद्र में आपकी सूचना दर्ज हो गई है।',
-      'Your report has been logged with the Devtalab Shiv Mandir pilgrim helpdesk.',
+      'माँ शारदा मंदिर सहायता केंद्र में आपकी सूचना दर्ज हो गई है।',
+      'Your report has been logged with the Maa Sharda pilgrim helpdesk.',
       'Push'
     );
   };
@@ -1004,6 +1127,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       resolveComplaint,
       rateComplaint,
       reopenComplaint,
+      bookWaterTanker,
+      bookJcb,
       payTaxBill,
       addLostAndFound,
       addEmployee,

@@ -20,7 +20,9 @@ export const DeptOfficerView: React.FC = () => {
   // Strict scoping: Department Officers only see complaints belonging to their own department
   const deptComplaints = useMemo(() => {
     if (!officerDept || officerDept === 'all') return complaints;
-    return complaints.filter((c) => c.category === officerDept);
+    return complaints.filter(
+      (c) => c.category === officerDept || (officerDept === 'water' && c.category === 'handpump')
+    );
   }, [complaints, officerDept]);
 
   // Department-owned active field staff
@@ -101,8 +103,8 @@ export const DeptOfficerView: React.FC = () => {
                     ? deptCategory.deptHi
                     : deptCategory.deptEn
                   : language === 'hi'
-                  ? 'सभी विभाग'
-                  : 'All Departments'}
+                    ? 'सभी विभाग'
+                    : 'All Departments'}
               </h2>
             </div>
           </div>
@@ -116,8 +118,8 @@ export const DeptOfficerView: React.FC = () => {
           <strong className="text-[var(--mnp-text-secondary)]">
             {deptFieldStaff.length > 0
               ? deptFieldStaff
-                  .map((s) => (language === 'hi' ? s.nameHi : s.nameEn))
-                  .join(', ')
+                .map((s) => (language === 'hi' ? s.nameHi : s.nameEn))
+                .join(', ')
               : '—'}
           </strong>
         </p>
@@ -221,11 +223,10 @@ export const DeptOfficerView: React.FC = () => {
             return (
               <div
                 key={c.id}
-                className={`rounded-[12px] border p-3.5 space-y-2.5 shadow-[var(--mnp-shadow-card)] ${
-                  sla.isOverdue
+                className={`rounded-[12px] border p-3.5 space-y-2.5 shadow-[var(--mnp-shadow-card)] ${sla.isOverdue
                     ? 'border-[#F5B8B8] dark:border-[#7A272D] bg-[var(--mnp-error-bg)]'
                     : 'border-[var(--mnp-border)] bg-[var(--mnp-surface)]'
-                }`}
+                  }`}
               >
                 <button
                   type="button"

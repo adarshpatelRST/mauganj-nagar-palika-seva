@@ -9,6 +9,7 @@ import { CityInfoView } from './modules/cityinfo/CityInfoView';
 import { ComplaintDetail } from './modules/complaints/ComplaintDetail';
 import { ComplaintList } from './modules/complaints/ComplaintList';
 import { ReportFlow } from './modules/complaints/ReportFlow';
+import { FrontPageView, FrontPublicScreen } from './modules/frontpage/FrontPageView';
 import { GarbageVanView } from './modules/garbage/GarbageVanView';
 import { HelplinesView } from './modules/helplines/HelplinesView';
 import { HomeView } from './modules/home/HomeView';
@@ -21,57 +22,98 @@ import { ProfileView } from './modules/profile/ProfileView';
 import { ServicesHub } from './modules/services/ServicesHub';
 import { TempleView } from './modules/temple/TempleView';
 import { AppProvider, useApp } from './store/AppContext';
-import { CitizenScreen, CitizenTab, PlaceTypeId } from './types';
+import { CitizenScreen, CitizenTab, ComplaintCategoryId, PlaceTypeId } from './types';
+import { E_NAGARPALIKA_PORTAL_URL } from './constants';
+import { AppIssuesView } from './modules/app_issues/AppIssuesView';
+import { AboutAppView } from './modules/about_app/AboutAppView';
+import { AchievementsView } from './modules/achievements/AchievementsView';
+import { NewsView } from './modules/news/NewsView';
+import { WaterTankerBookingView } from './modules/bookings/WaterTankerBookingView';
+import { JcbBookingView } from './modules/bookings/JcbBookingView';
+
+type GuestView = 'front' | 'login' | 'register' | FrontPublicScreen;
 
 const TAB_SCREENS: CitizenTab[] = ['home', 'report', 'services', 'nearby', 'profile'];
 
-const PROTECTED_SCREENS: CitizenScreen[] = [
-  'report',
-  'complaints',
-  'complaint_detail',
-  'notifications',
-];
-
 const CitizenShell: React.FC = () => {
-  const { citizen, t } = useApp();
+  const { citizen, t, showToast } = useApp();
+  const [guestView, setGuestView] = useState<GuestView>('front');
   const [screen, setScreen] = useState<CitizenScreen>('home');
   const [previousScreen, setPreviousScreen] = useState<CitizenScreen>('home');
   const [selectedComplaintId, setSelectedComplaintId] = useState<string | null>(null);
   const [nearbyCategory, setNearbyCategory] = useState<PlaceTypeId>('hospital');
-  const [authTab, setAuthTab] = useState<'login' | 'register'>('login');
-  const [pendingScreen, setPendingScreen] = useState<CitizenScreen | null>(null);
-  const [authContextNotice, setAuthContextNotice] = useState<string | undefined>(undefined);
+  const [reportCategory, setReportCategory] = useState<ComplaintCategoryId | undefined>(undefined);
 
   useEffect(() => {
-    if (citizen.isAuthenticated) {
-      if (pendingScreen) {
-        setScreen(pendingScreen);
-        setPendingScreen(null);
-      } else if (screen === 'auth') {
-        setScreen('home');
-      }
-      setAuthContextNotice(undefined);
-    } else {
-      setScreen('home');
-      setPreviousScreen('home');
-      setSelectedComplaintId(null);
-      setPendingScreen(null);
-      setAuthContextNotice(undefined);
+    setScreen('home');
+    setPreviousScreen('home');
+    setSelectedComplaintId(null);
+    if (!citizen.isAuthenticated) {
+      setGuestView('front');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [citizen.mobile, citizen.isAuthenticated]);
 
-  const openAuth = (tab: 'login' | 'register', targetAfterAuth?: CitizenScreen) => {
-    setAuthTab(tab);
-    setPendingScreen(targetAfterAuth ?? null);
-    setAuthContextNotice(targetAfterAuth ? t.guestAuthRequiredNote : undefined);
-    setPreviousScreen(screen === 'auth' ? 'home' : screen);
-    setScreen('auth');
-  };
+  if (!citizen.isAuthenticated) {
+    if (guestView === 'front') {
+      return (
+        <FrontPageView
+          onOpenLogin={() => setGuestView('login')}
+          onOpenRegister={() => setGuestView('register')}
+          onOpenPublicScreen={(target) => setGuestView(target)}
+          onRequireLogin={() => {
+            showToast(t.citizenLoginTab, t.frontLoginRequiredToast, 'Info');
+            setGuestView('login');
+          }}
+        />
+      );
+    }
+
+    if (guestView === 'login' || guestView === 'register') {
+      return (
+        <OnboardingView
+          initialTab={guestView}
+          onBack={() => setGuestView('front')}
+        />
+      );
+    }
+
+    const guestTitleMap: Record<FrontPublicScreen, string> = {
+      garbage: t.garbageTitle,
+      temple: t.templeTitle,
+      helplines: t.helplinesTitle,
+      nearby: t.nearbyTitle,
+      cityinfo: t.cityInfoTitle,
+      about: t.aboutTitle,
+      faq: t.faqTitle,
+      terms: t.termsTitle,
+      privacy: t.privacyTitle,
+      achievements: t.achievementsTitle,
+      news: t.newsTitle,
+    };
+
+    return (
+      <div className="flex-1 flex flex-col min-h-0">
+        <TopBar title={guestTitleMap[guestView]} onBack={() => setGuestView('front')} />
+        <main className="flex-1 overflow-y-auto phone-scroll bg-[var(--mnp-bg)]">
+          {guestView === 'garbage' && <GarbageVanView />}
+          {guestView === 'temple' && <TempleView />}
+          {guestView === 'helplines' && <HelplinesView />}
+          {guestView === 'nearby' && <NearbyView initialCategory={nearbyCategory} />}
+          {guestView === 'cityinfo' && <CityInfoView />}
+          {guestView === 'achievements' && <AchievementsView />}
+          {guestView === 'news' && <NewsView />}
+          {(guestView === 'about' ||
+            guestView === 'faq' ||
+            guestView === 'terms' ||
+            guestView === 'privacy') && <InfoPagesView page={guestView} />}
+        </main>
+      </div>
+    );
+  }
 
   const navigate = (target: CitizenScreen) => {
-    if (!citizen.isAuthenticated && PROTECTED_SCREENS.includes(target)) {
-      openAuth('login', target);
+    if (target === 'bills') {
+      window.location.href = E_NAGARPALIKA_PORTAL_URL;
       return;
     }
     setPreviousScreen(screen);
@@ -84,41 +126,29 @@ const CitizenShell: React.FC = () => {
     setScreen('nearby');
   };
 
+  const openReportCategory = (category?: ComplaintCategoryId) => {
+    setReportCategory(category);
+    setPreviousScreen(screen);
+    setScreen('report');
+  };
+
   const openComplaint = (id: string) => {
-    if (!citizen.isAuthenticated) {
-      openAuth('login', 'complaints');
-      return;
-    }
     setSelectedComplaintId(id);
     setPreviousScreen(screen);
     setScreen('complaint_detail');
   };
 
-  if (screen === 'auth' && !citizen.isAuthenticated) {
-    return (
-      <OnboardingView
-        initialTab={authTab}
-        contextNotice={authContextNotice}
-        onBack={() => {
-          setPendingScreen(null);
-          setAuthContextNotice(undefined);
-          setScreen(previousScreen === 'auth' ? 'home' : previousScreen);
-        }}
-      />
-    );
-  }
-
   const activeTab: CitizenTab = TAB_SCREENS.includes(screen as CitizenTab)
     ? (screen as CitizenTab)
     : screen === 'complaints' || screen === 'complaint_detail' || screen === 'notifications'
-    ? 'home'
-    : screen === 'about' || screen === 'faq' || screen === 'terms' || screen === 'privacy'
-    ? previousScreen === 'home'
       ? 'home'
-      : previousScreen === 'services'
-      ? 'services'
-      : 'profile'
-    : 'services';
+      : screen === 'about' || screen === 'faq' || screen === 'terms' || screen === 'privacy'
+        ? previousScreen === 'home'
+          ? 'home'
+          : previousScreen === 'services'
+            ? 'services'
+            : 'profile'
+        : 'services';
 
   const isRootTab = TAB_SCREENS.includes(screen as CitizenTab);
 
@@ -140,7 +170,12 @@ const CitizenShell: React.FC = () => {
     faq: t.faqTitle,
     terms: t.termsTitle,
     privacy: t.privacyTitle,
-    auth: t.citizenLoginTitle,
+    app_issues: t.appIssuesTitle,
+    about_app: t.aboutAppTitle,
+    achievements: t.achievementsTitle,
+    news: t.newsTitle,
+    tanker_booking: t.tankerBookingTitle,
+    jcb_booking: t.jcbBookingTitle,
   };
 
   const handleBack = () => {
@@ -153,8 +188,8 @@ const CitizenShell: React.FC = () => {
         previousScreen === 'home'
           ? 'home'
           : previousScreen === 'services'
-          ? 'services'
-          : 'profile'
+            ? 'services'
+            : 'profile'
       );
       return;
     }
@@ -163,7 +198,13 @@ const CitizenShell: React.FC = () => {
       screen === 'bills' ||
       screen === 'garbage' ||
       screen === 'temple' ||
-      screen === 'cityinfo'
+      screen === 'cityinfo' ||
+      screen === 'app_issues' ||
+      screen === 'about_app' ||
+      screen === 'achievements' ||
+      screen === 'news' ||
+      screen === 'tanker_booking' ||
+      screen === 'jcb_booking'
     ) {
       setScreen(previousScreen === 'home' ? 'home' : 'services');
       return;
@@ -177,9 +218,7 @@ const CitizenShell: React.FC = () => {
         title={screenTitleMap[screen]}
         onBack={!isRootTab ? handleBack : undefined}
         onOpenNotifications={
-          citizen.isAuthenticated && screen !== 'notifications'
-            ? () => navigate('notifications')
-            : undefined
+          screen !== 'notifications' ? () => navigate('notifications') : undefined
         }
       />
 
@@ -189,22 +228,27 @@ const CitizenShell: React.FC = () => {
             onNavigate={navigate}
             onOpenComplaint={openComplaint}
             onOpenNearbyCategory={openNearbyCategory}
-            onOpenAuth={(tab) => openAuth(tab)}
+            onOpenReportCategory={openReportCategory}
           />
         )}
         {screen === 'report' && (
           <ReportFlow
+            initialCategory={reportCategory}
             onSuccessViewComplaint={(id) => openComplaint(id)}
             onCancel={() => navigate('home')}
           />
         )}
-        {screen === 'services' && <ServicesHub onNavigate={navigate} />}
+        {screen === 'services' && (
+          <ServicesHub
+            onNavigate={navigate}
+            onOpenReportCategory={openReportCategory}
+          />
+        )}
         {screen === 'nearby' && <NearbyView initialCategory={nearbyCategory} />}
         {screen === 'profile' && (
           <ProfileView
             onOpenMyComplaints={() => navigate('complaints')}
             onNavigate={navigate}
-            onOpenAuth={(tab) => openAuth(tab)}
           />
         )}
         {screen === 'complaints' && (
@@ -231,15 +275,30 @@ const CitizenShell: React.FC = () => {
           screen === 'faq' ||
           screen === 'terms' ||
           screen === 'privacy') && <InfoPagesView page={screen} />}
+        {screen === 'app_issues' && (
+          <AppIssuesView
+            onCancel={() => navigate('services')}
+            onSuccessViewComplaint={(id) => openComplaint(id)}
+          />
+        )}
+        {screen === 'about_app' && (
+          <AboutAppView
+            onBack={() => navigate('services')}
+            onOpenAppIssues={() => navigate('app_issues')}
+            onOpenFaq={() => navigate('faq')}
+            onOpenTerms={() => navigate('terms')}
+            onOpenPrivacy={() => navigate('privacy')}
+          />
+        )}
+        {screen === 'achievements' && <AchievementsView />}
+        {screen === 'news' && <NewsView />}
+        {screen === 'tanker_booking' && <WaterTankerBookingView onBack={handleBack} />}
+        {screen === 'jcb_booking' && <JcbBookingView onBack={handleBack} />}
       </main>
 
       <BottomNav
         activeTab={activeTab}
         onSelectTab={(tab) => {
-          if (!citizen.isAuthenticated && PROTECTED_SCREENS.includes(tab)) {
-            openAuth('login', tab);
-            return;
-          }
           setPreviousScreen(screen);
           setScreen(tab);
         }}

@@ -6,7 +6,6 @@ import {
   Globe,
   HelpCircle,
   Info,
-  LogIn,
   LogOut,
   MapPin,
   Moon,
@@ -15,7 +14,6 @@ import {
   ShieldCheck,
   Sun,
   User,
-  UserPlus,
 } from 'lucide-react';
 import { WARDS } from '../../constants';
 import { PWAInstallButton } from '../../components/PWAInstallButton';
@@ -26,13 +24,11 @@ import { CitizenScreen } from '../../types';
 interface ProfileViewProps {
   onOpenMyComplaints: () => void;
   onNavigate: (screen: CitizenScreen) => void;
-  onOpenAuth: (tab: 'login' | 'register') => void;
 }
 
 export const ProfileView: React.FC<ProfileViewProps> = ({
   onOpenMyComplaints,
   onNavigate,
-  onOpenAuth,
 }) => {
   const {
     citizen,
@@ -52,103 +48,67 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
 
   return (
     <div className="p-4 space-y-4">
-      {/* Guest Account Prompt vs Authenticated Citizen Profile */}
-      {citizen.isAuthenticated ? (
-        <div className={`${UI.card} p-4 space-y-3`}>
-          <div className="flex items-center gap-3.5 pb-2 border-b border-[var(--mnp-border)]">
-            <div className="w-14 h-14 rounded-full bg-[var(--mnp-primary-soft)] text-[var(--mnp-primary)] flex items-center justify-center shrink-0">
-              <User className="w-7 h-7" />
-            </div>
-            <div className="min-w-0">
-              <h2 className="text-[16px] font-bold text-[var(--mnp-text)] truncate">
-                {citizen.name}
-              </h2>
-              <p className="text-xs text-[var(--mnp-text-muted)] flex items-center gap-1 mt-0.5 tabular-nums">
-                <Phone className="w-3.5 h-3.5 text-[var(--mnp-primary)]" />
-                <span>+91 {citizen.mobile}</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Ward Selector */}
-          <div className="space-y-1.5">
-            <label
-              htmlFor="profile-ward"
-              className="block text-xs font-bold text-[var(--mnp-text-secondary)]"
-            >
-              {t.selectWard}
-            </label>
-            <div className="relative">
-              <MapPin className="w-4 h-4 text-[var(--mnp-primary)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <select
-                id="profile-ward"
-                value={citizen.ward}
-                onChange={(e) => updateCitizenWard(Number(e.target.value))}
-                className={`${UI.input} pl-10`}
-              >
-                {WARDS.map((w) => (
-                  <option key={w.id} value={w.id}>
-                    {language === 'hi' ? w.nameHi : w.nameEn}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className={`${UI.card} p-5 space-y-4 text-center`}>
-          <div className="w-14 h-14 mx-auto rounded-full bg-[var(--mnp-primary-soft)] text-[var(--mnp-primary)] flex items-center justify-center">
+      {/* Clean Avatar & Identity Fields */}
+      <div className={`${UI.card} p-4 space-y-3`}>
+        <div className="flex items-center gap-3.5 pb-2 border-b border-[var(--mnp-border)]">
+          <div className="w-14 h-14 rounded-full bg-[var(--mnp-primary-soft)] text-[var(--mnp-primary)] flex items-center justify-center shrink-0">
             <User className="w-7 h-7" />
           </div>
-          <div className="space-y-1">
-            <h2 className="text-[16px] font-bold text-[var(--mnp-text)]">
-              {t.guestProfileTitle}
+          <div className="min-w-0">
+            <h2 className="text-[16px] font-bold text-[var(--mnp-text)] truncate">
+              {citizen.name}
             </h2>
-            <p className="text-xs text-[var(--mnp-text-muted)] leading-relaxed">
-              {t.guestProfileSubtitle}
+            <p className="text-xs text-[var(--mnp-text-muted)] flex items-center gap-1 mt-0.5 tabular-nums">
+              <Phone className="w-3.5 h-3.5 text-[var(--mnp-primary)]" />
+              <span>+91 {citizen.mobile}</span>
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-2.5">
-            <button
-              type="button"
-              onClick={() => onOpenAuth('register')}
-              className={`${UI.btnPrimary} flex items-center justify-center gap-1.5 whitespace-nowrap`}
+        </div>
+
+        {/* Ward Selector */}
+        <div className="space-y-1.5">
+          <label
+            htmlFor="profile-ward"
+            className="block text-xs font-bold text-[var(--mnp-text-secondary)]"
+          >
+            {t.selectWard}
+          </label>
+          <div className="relative">
+            <MapPin className="w-4 h-4 text-[var(--mnp-primary)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <select
+              id="profile-ward"
+              value={citizen.ward}
+              onChange={(e) => updateCitizenWard(Number(e.target.value))}
+              className={`${UI.input} pl-10`}
             >
-              <UserPlus className="w-4 h-4 shrink-0" />
-              <span>{t.frontRegisterBtn}</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => onOpenAuth('login')}
-              className={`${UI.btnOutline} border-[var(--mnp-primary)] text-[var(--mnp-primary)] flex items-center justify-center gap-1.5 whitespace-nowrap`}
-            >
-              <LogIn className="w-4 h-4 shrink-0" />
-              <span>{t.frontLoginBtn}</span>
-            </button>
+              {WARDS.map((w) => (
+                <option key={w.id} value={w.id}>
+                  {language === 'hi' ? w.nameHi : w.nameEn}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
-      )}
+      </div>
 
       {/* Clean Floating Action & Preference Rows */}
       <div className="space-y-2.5">
-        {citizen.isAuthenticated && (
-          <button
-            type="button"
-            onClick={onOpenMyComplaints}
-            className={`${UI.cardInteractive} w-full min-h-[60px] px-4 flex items-center justify-between gap-3 text-left`}
-          >
-            <span className="flex items-center gap-3 text-sm font-bold text-[var(--mnp-text)]">
-              <span className="w-9 h-9 rounded-[10px] bg-[var(--mnp-primary-soft)] text-[var(--mnp-primary)] flex items-center justify-center shrink-0">
-                <ClipboardList className="w-4 h-4" />
-              </span>
-              <span>{t.myComplaintsLink}</span>
+        <button
+          type="button"
+          onClick={onOpenMyComplaints}
+          className={`${UI.cardInteractive} w-full min-h-[60px] px-4 flex items-center justify-between gap-3 text-left`}
+        >
+          <span className="flex items-center gap-3 text-sm font-bold text-[var(--mnp-text)]">
+            <span className="w-9 h-9 rounded-[10px] bg-[var(--mnp-primary-soft)] text-[var(--mnp-primary)] flex items-center justify-center shrink-0">
+              <ClipboardList className="w-4 h-4" />
             </span>
-            <span className="flex items-center gap-1.5 text-xs font-bold text-[var(--mnp-primary)] tabular-nums">
-              <span>{myCount}</span>
-              <ChevronRight className="w-4 h-4 text-[var(--mnp-text-muted)]" />
-            </span>
-          </button>
-        )}
+            <span>{t.myComplaintsLink}</span>
+          </span>
+          <span className="flex items-center gap-1.5 text-xs font-bold text-[var(--mnp-primary)] tabular-nums">
+            <span>{myCount}</span>
+            <ChevronRight className="w-4 h-4 text-[var(--mnp-text-muted)]" />
+          </span>
+        </button>
 
         {/* Language Toggle */}
         <div className={`${UI.card} min-h-[60px] px-4 py-2 flex items-center justify-between gap-3`}>
@@ -253,27 +213,25 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
       <PWAInstallButton />
 
       {/* Reset Demo Data & Sign Out */}
-      {citizen.isAuthenticated && (
-        <div className="space-y-2.5 pt-1">
-          <button
-            type="button"
-            onClick={() => setShowResetModal(true)}
-            className={`${UI.btnDangerOutline} w-full flex items-center justify-center gap-2`}
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span>{t.resetDemoData}</span>
-          </button>
+      <div className="space-y-2.5 pt-1">
+        <button
+          type="button"
+          onClick={() => setShowResetModal(true)}
+          className={`${UI.btnDangerOutline} w-full flex items-center justify-center gap-2`}
+        >
+          <RotateCcw className="w-4 h-4" />
+          <span>{t.resetDemoData}</span>
+        </button>
 
-          <button
-            type="button"
-            onClick={signOutCitizen}
-            className={`${UI.btnOutline} w-full text-xs flex items-center justify-center gap-2`}
-          >
-            <LogOut className="w-4 h-4" />
-            <span>{t.signOutDemo}</span>
-          </button>
-        </div>
-      )}
+        <button
+          type="button"
+          onClick={signOutCitizen}
+          className={`${UI.btnOutline} w-full text-xs flex items-center justify-center gap-2`}
+        >
+          <LogOut className="w-4 h-4" />
+          <span>{t.signOutDemo}</span>
+        </button>
+      </div>
 
       <p className="text-center text-[11px] text-[var(--mnp-text-muted)] pt-1">
         {t.appVersionNote}

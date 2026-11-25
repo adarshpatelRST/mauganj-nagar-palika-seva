@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CheckCircle2,
   CreditCard,
   Droplets,
+  ExternalLink,
   Home,
   Info,
   Receipt,
@@ -14,14 +15,14 @@ import { ICON_CIRCLE_THEMES, UI } from '../../theme/tokens';
 import { useApp } from '../../store/AppContext';
 import { Payment } from '../../types';
 import { formatDateTime } from '../../utils/format';
+import { E_NAGARPALIKA_PORTAL_URL } from '../../constants';
 
-// REAL INTEGRATION NOTE: Connect Property/Water tax lookup & payment to MP e-Nagarpalika API
-// and Bharat Bill Payment System (BBPS) / Razorpay / SBIePay payment gateway with webhook verification.
+// REAL INTEGRATION NOTE: Property and water tax payments redirect directly to MP e-Nagarpalika official portal.
 
 export const BillsView: React.FC = () => {
-  const { taxAccounts, payments, language, t, payTaxBill } = useApp();
+  const { taxAccounts, payments, language, t } = useApp();
   const [taxType, setTaxType] = useState<'property' | 'water'>('property');
-  const [propertyId, setPropertyId] = useState('MUG-P-1001');
+  const [propertyId, setPropertyId] = useState('MHR-P-1001');
   const [fetchedId, setFetchedId] = useState<string | null>(null);
   const [payMethod, setPayMethod] = useState<'UPI' | 'Card'>('UPI');
   const [upiId, setUpiId] = useState('citizen@upi');
@@ -29,6 +30,10 @@ export const BillsView: React.FC = () => {
   const [error, setError] = useState('');
   const [receipt, setReceipt] = useState<Payment | null>(null);
   const [showElecInfo, setShowElecInfo] = useState(false);
+
+  useEffect(() => {
+    window.location.href = E_NAGARPALIKA_PORTAL_URL;
+  }, []);
 
   const activeAccount = fetchedId
     ? taxAccounts.find((a) => a.propertyId.toUpperCase() === fetchedId.toUpperCase()) || null
@@ -60,24 +65,35 @@ export const BillsView: React.FC = () => {
   };
 
   const handlePay = () => {
-    if (!activeAccount) return;
-    if (payMethod === 'UPI' && (!upiId.includes('@') || upiId.trim().length < 5)) {
-      setError(t.errEnterUpi);
-      return;
-    }
-    if (payMethod === 'Card' && cardLast4.replace(/\D/g, '').length !== 4) {
-      setError(t.errEnterCard);
-      return;
-    }
-    setError('');
-    const result = payTaxBill(activeAccount.propertyId, taxType, payMethod);
-    if (result) {
-      setReceipt(result);
-    }
+    window.location.href = E_NAGARPALIKA_PORTAL_URL;
   };
 
   return (
     <div className="p-3.5 space-y-3.5">
+      {/* Official MP e-Nagarpalika Direct Redirect Banner */}
+      <div className="rounded-[16px] p-4 bg-gradient-to-r from-[#1976D2] to-[#0D47A1] text-white shadow-md space-y-3">
+        <div className="flex items-center gap-2">
+          <ExternalLink className="w-5 h-5 shrink-0 text-yellow-300" />
+          <h2 className="text-sm font-bold">
+            {language === 'hi' ? 'म.प्र. ई-नगरपालिका आधिकारिक पोर्टल' : 'MP e-Nagarpalika Official Portal'}
+          </h2>
+        </div>
+        <p className="text-xs text-blue-100 leading-relaxed">
+          {language === 'hi'
+            ? 'मैहर नगर पालिका के संपत्ति कर एवं जल कर का ऑनलाइन भुगतान मध्य प्रदेश शासन के आधिकारिक ई-नगरपालिका पोर्टल पर होता है।'
+            : 'Online payment of property tax and water tax for Maihar Nagar Palika is processed on the Government of MP e-Nagarpalika portal.'}
+        </p>
+        <button
+          type="button"
+          onClick={() => {
+            window.location.href = E_NAGARPALIKA_PORTAL_URL;
+          }}
+          className="w-full py-2.5 px-4 rounded-[10px] bg-white text-[#0D47A1] hover:bg-blue-50 text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-[0.98]"
+        >
+          <span>{language === 'hi' ? 'ई-नगरपालिका पर कर भुगतान करें' : 'Pay Tax on e-Nagarpalika Portal'}</span>
+          <ExternalLink className="w-4 h-4 shrink-0" />
+        </button>
+      </div>
       {/* Tax Type Switcher */}
       <div className="grid grid-cols-2 gap-2">
         <button
@@ -325,9 +341,15 @@ export const BillsView: React.FC = () => {
                   <button
                     type="button"
                     onClick={handlePay}
-                    className={`${UI.btnSuccess} w-full tabular-nums`}
+                    className={`${UI.btnSuccess} w-full tabular-nums flex items-center justify-center gap-2`}
                   >
-                    {t.payNowSimulated} · ₹{dueAmount.toLocaleString('en-IN')}
+                    <span>
+                      {language === 'hi'
+                        ? 'ई-नगरपालिका पोर्टल पर भुगतान करें'
+                        : 'Pay on MP e-Nagarpalika Portal'}
+                      {' · ₹' + dueAmount.toLocaleString('en-IN')}
+                    </span>
+                    <ExternalLink className="w-4 h-4 shrink-0" />
                   </button>
                 </div>
               )}

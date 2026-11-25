@@ -78,15 +78,6 @@ export interface Translations {
   myActiveComplaints: string;
   noActiveComplaints: string;
   noActiveComplaintsAction: string;
-  frontCarouselAria: string;
-  frontAuthTitle: string;
-  frontAuthSubtitle: string;
-  frontRegisterBtn: string;
-  frontLoginBtn: string;
-  guestAuthRequiredNote: string;
-  guestProfileTitle: string;
-  guestProfileSubtitle: string;
-  backToFrontPage: string;
 
   // Complaints & Reporting
   reportStepTitle: string;
@@ -162,6 +153,40 @@ export interface Translations {
   serviceGarbageSub: string;
   serviceTempleSub: string;
   serviceTrackSub: string;
+  appIssuesTitle: string;
+  appIssuesSub: string;
+  aboutAppTitle: string;
+  aboutAppSub: string;
+  achievementsTitle: string;
+  achievementsSub: string;
+  newsTitle: string;
+  newsSub: string;
+  achievementsFilterAll: string;
+  newsFilterAll: string;
+  newsBreakingBadge: string;
+  newsTodayLive: string;
+  tankerBookingTitle: string;
+  tankerBookingSub: string;
+  jcbBookingTitle: string;
+  jcbBookingSub: string;
+  cameraOnlyPrompt: string;
+  liveCameraSecurityNote: string;
+  openCameraBtn: string;
+  capturePhotoBtn: string;
+  retakePhotoBtn: string;
+  cameraPermissionDenied: string;
+  cameraSwitchBtn: string;
+  vehicleLiveLocationTitle: string;
+  vehicleCurrentStatus: string;
+  liveGpsTracking: string;
+  speedLabel: string;
+  lastPingLabel: string;
+  stopsTimelineTitle: string;
+  completedStopLabel: string;
+  currentStopLabel: string;
+  upcomingStopLabel: string;
+  setArrivalAlertBtn: string;
+  arrivalAlertSetMsg: string;
 
   // Helplines
   helplinesTitle: string;
@@ -436,12 +461,23 @@ export interface Translations {
   termsSections: { heading: string; body: string }[];
   privacyUpdatedLabel: string;
   privacySections: { heading: string; body: string }[];
+
+  // Front Page (City Carousel + Services + Register/Login)
+  frontCityTagline: string;
+  frontServicesTitle: string;
+  frontServicesSub: string;
+  frontAuthTitle: string;
+  frontAuthSub: string;
+  frontLoginCta: string;
+  frontRegisterCta: string;
+  frontLoginRequiredToast: string;
+  frontCarouselSlides: { title: string; subtitle: string }[];
 }
 
 export const TRANSLATIONS: Record<Language, Translations> = {
   hi: {
-    appName: 'मऊगंज नगर पालिका सेवा',
-    appShort: 'मऊगंज सेवा',
+    appName: 'मैहर नगर पालिका सेवा',
+    appShort: 'मैहर सेवा',
     demoBanner: 'डेमो संस्करण, नमूना डेटा। OTP 1234।',
     citizenApp: 'नागरिक ऐप',
     officerApp: 'अधिकारी ऐप',
@@ -477,7 +513,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     navNearby: 'आसपास',
     navProfile: 'प्रोफ़ाइल',
 
-    onboardingWelcome: 'मऊगंज नगर पालिका सेवा में स्वागत है',
+    onboardingWelcome: 'मैहर नगर पालिका सेवा में स्वागत है',
     onboardingSubtitle: 'नागरिक शिकायतें, कर भुगतान, कचरा वाहन और तीर्थयात्री सुविधाएं एक ही ऐप में।',
     chooseLanguage: 'अपनी भाषा चुनें',
     enterMobileTitle: 'मोबाइल नंबर से प्रवेश करें',
@@ -514,15 +550,6 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     myActiveComplaints: 'मेरी सक्रिय शिकायतें',
     noActiveComplaints: 'अभी कोई सक्रिय शिकायत नहीं है।',
     noActiveComplaintsAction: 'नई शिकायत दर्ज करने के लिए ऊपर "समस्या दर्ज करें" पर टैप करें।',
-    frontCarouselAria: 'मऊगंज शहर की झलकियां',
-    frontAuthTitle: 'नागरिक खाता — पंजीकरण एवं लॉगिन',
-    frontAuthSubtitle: 'शिकायत दर्ज करने, स्थिति ट्रैक करने और वार्ड अपडेट पाने के लिए अपना खाता बनाएं या लॉगिन करें।',
-    frontRegisterBtn: 'नया पंजीकरण',
-    frontLoginBtn: 'लॉगिन करें',
-    guestAuthRequiredNote: 'इस सेवा का उपयोग करने के लिए कृपया अपने मोबाइल नंबर से लॉगिन या नया पंजीकरण करें।',
-    guestProfileTitle: 'नागरिक पोर्टल में प्रवेश करें',
-    guestProfileSubtitle: 'अपने वार्ड की शिकायतें दर्ज व ट्रैक करने और व्यक्तिगत अलर्ट पाने के लिए लॉगिन अथवा पंजीकरण करें।',
-    backToFrontPage: 'मुख्य पृष्ठ',
 
     reportStepTitle: 'नई शिकायत दर्ज करें',
     step1Photo: '1. फोटो जोड़ें',
@@ -540,10 +567,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     slaTarget: 'निराकरण समय-सीमा:',
     detectGpsBtn: 'मेरा GPS स्थान प्राप्त करें',
     gpsDetected: 'GPS स्थान प्राप्त हुआ',
-    gpsSimulatedNote: 'डेमो मोड: मऊगंज वार्ड केंद्र का GPS निर्देशांक उपयोग किया गया।',
+    gpsSimulatedNote: 'डेमो मोड: मैहर वार्ड केंद्र का GPS निर्देशांक उपयोग किया गया।',
     gpsFallbackNote: 'GPS उपलब्ध न होने पर नीचे वार्ड और लैंडमार्क दर्ज करें।',
     landmarkLabel: 'नजदीकी पहचान / पता (लैंडमार्क)',
-    landmarkPlaceholder: 'उदा. छोटी बाजार चौक के पास, मुख्य सड़क',
+    landmarkPlaceholder: 'उदा. घंटाघर चौक के पास, मुख्य सड़क',
     descriptionLabel: 'अतिरिक्त विवरण',
     descriptionPlaceholder: 'समस्या के बारे में संक्षिप्त जानकारी लिखें...',
     voiceNoteBtn: 'वॉइस संदेश रिकॉर्ड करें (डेमो)',
@@ -557,7 +584,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     errEnterLandmark: 'कृपया नजदीकी स्थान (लैंडमार्क) दर्ज करें।',
     errSelectWard: 'कृपया अपना वार्ड चुनें।',
     trackComplaintsTitle: 'शिकायतें एवं स्थिति',
-    searchByIdPlaceholder: 'शिकायत आईडी या लैंडमार्क खोजें (उदा. MUG-2026-0001)',
+    searchByIdPlaceholder: 'शिकायत आईडी या लैंडमार्क खोजें (उदा. MHR-2026-0001)',
     noComplaintsFound: 'इस फ़िल्टर में कोई शिकायत नहीं मिली।',
     noComplaintsHint: 'फ़िल्टर बदलें या नई शिकायत दर्ज करें।',
     complaintDetailTitle: 'शिकायत विवरण',
@@ -599,21 +626,55 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     },
 
     servicesHubTitle: 'नगर पालिका सेवाएं',
-    servicesHubSub: 'मऊगंज नगर पालिका की सभी डिजिटल नागरिक सेवाएं',
+    servicesHubSub: 'मैहर नगर पालिका की सभी डिजिटल नागरिक सेवाएं',
     serviceCityInfo: 'शहर एवं नगर पालिका जानकारी',
     serviceCityInfoSub: 'विभाग संपर्क, पार्षद, निविदाएं, प्रमाण-पत्र स्थिति',
     serviceBillsSub: 'संपत्ति कर, जल कर भुगतान व बिजली सूचना',
     serviceHelplinesSub: 'अग्निशमन, एम्बुलेंस, पुलिस व आपातकालीन कॉल',
     serviceGarbageSub: 'कचरा संग्रहण वाहन मार्ग व आगमन समय',
-    serviceTempleSub: 'देवतालाब शिव मंदिर दर्शन, आरती, भीड़ व पार्किंग',
+    serviceTempleSub: 'माँ शारदा देवी दर्शन, आरती, भीड़ व पार्किंग',
     serviceTrackSub: 'अपनी दर्ज शिकायतों की स्थिति और इतिहास देखें',
+    appIssuesTitle: 'ऐप संबंधित समस्याएं',
+    appIssuesSub: 'ऐप में बग या तकनीकी दिक्कत की सीधे एडमिन से शिकायत',
+    aboutAppTitle: 'ऐप के बारे में',
+    aboutAppSub: 'संस्करण v2.1.0 एवं IT प्रशासन विवरण',
+    achievementsTitle: 'नगर पालिका द्वारा किये गए कार्य',
+    achievementsSub: 'नगर पालिका द्वारा पूर्ण किए गए प्रमुख विकास एवं जनकल्याणकारी कार्य',
+    newsTitle: 'नगर समाचार अपडेट',
+    newsSub: 'मैहर नगर पालिका की दैनिक सूचनाएं, बुलेटिन एवं ताज़ा समाचार',
+    achievementsFilterAll: 'सभी कार्य',
+    newsFilterAll: 'सभी समाचार',
+    newsBreakingBadge: 'ताज़ा अपडेट',
+    newsTodayLive: 'आज का दैनिक बुलेटिन',
+    tankerBookingTitle: 'पानी टैंकर बुकिंग',
+    tankerBookingSub: 'आपातकालीन पेयजल व आयोजनों हेतु नगर पालिका टैंकर मंगाएं',
+    jcbBookingTitle: 'जेसीबी / भारी मशीनरी बुकिंग',
+    jcbBookingSub: 'मलबा हटाने, सफाई व खुदाई हेतु नगर पालिका जेसीबी मंगाएं',
+    cameraOnlyPrompt: 'लाइव कैमरे से फोटो खींचें',
+    liveCameraSecurityNote: 'सुरक्षा नियम: केवल मौके से लाइव कैमरे द्वारा ली गई फोटो ही मान्य है। गैलरी से अपलोडिंग प्रतिबंधित है।',
+    openCameraBtn: 'लाइव कैमरा चालू करें',
+    capturePhotoBtn: 'फोटो क्लिक करें',
+    retakePhotoBtn: 'पुनः फोटो खींचें',
+    cameraPermissionDenied: 'कैमरा अनुमति अस्वीकृत है। कृपया ब्राउज़र सेटिंग्स में कैमरा की अनुमति दें।',
+    cameraSwitchBtn: 'कैमरा बदलें',
+    vehicleLiveLocationTitle: 'वाहन की वर्तमान स्थिति (लाइव ट्रैकिंग)',
+    vehicleCurrentStatus: 'कचरा संग्रहण जारी',
+    liveGpsTracking: 'AIS-140 लाइव जीपीएस',
+    speedLabel: 'गति',
+    lastPingLabel: 'अंतिम सिग्नल',
+    stopsTimelineTitle: 'मार्ग स्टॉप एवं संग्रहण प्रगति',
+    completedStopLabel: 'कचरा उठाव संपन्न',
+    currentStopLabel: 'वाहन अभी यहाँ है',
+    upcomingStopLabel: 'आगामी स्टॉप',
+    setArrivalAlertBtn: 'आगमन अलार्म सेट करें',
+    arrivalAlertSetMsg: 'वाहन आपके वार्ड में पहुँचने पर अलर्ट भेजा जाएगा',
 
     helplinesTitle: 'आपातकालीन हेल्पलाइन',
     helplinesDisclaimer: 'सूचना: ये सभी डेमो हेतु स्पष्ट नमूना नंबर हैं। वास्तविक आपातकाल में आधिकारिक नंबर डायल करें।',
     tapToCall: 'कॉल करें',
     simulatedCallNotice: 'डेमो कॉल डायलर खोला जा रहा है:',
 
-    nearbyTitle: 'मेरे आसपास (मऊगंज)',
+    nearbyTitle: 'मेरे आसपास (मैहर)',
     listView: 'सूची',
     mapView: 'नक्शा',
     getDirections: 'दिशा-निर्देश',
@@ -626,14 +687,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     propertyTax: 'संपत्ति कर',
     waterTax: 'जल कर',
     electricityInfoTile: 'बिजली बिल (केवल जानकारी)',
-    electricityInfoDesc: 'मऊगंज क्षेत्र की विद्युत आपूर्ति मध्य प्रदेश पूर्व क्षेत्र विद्युत वितरण कंपनी (MPPKVVCL) द्वारा संचालित है। बिजली बिल का भुगतान आधिकारिक विद्युत पोर्टल पर किया जाता है।',
+    electricityInfoDesc: 'मैहर क्षेत्र की विद्युत आपूर्ति मध्य प्रदेश पूर्व क्षेत्र विद्युत वितरण कंपनी (MPPKVVCL) द्वारा संचालित है। बिजली बिल का भुगतान आधिकारिक विद्युत पोर्टल पर किया जाता है।',
     electricityPortalNote: 'नगर पालिका ऐप केवल संपत्ति कर और जल कर एकत्र करता है।',
     enterPropertyId: 'संपत्ति आईडी (Property ID) दर्ज करें',
-    propertyIdPlaceholder: 'उदा. MUG-P-1001',
-    sampleIdsHint: 'नमूना आईडी: MUG-P-1001, MUG-P-1002, MUG-P-1003',
+    propertyIdPlaceholder: 'उदा. MHR-P-1001',
+    sampleIdsHint: 'नमूना आईडी: MHR-P-1001, MHR-P-1002, MHR-P-1003',
     fetchDuesBtn: 'बकाया राशि देखें',
     errPropertyIdRequired: 'कृपया संपत्ति आईडी दर्ज करें।',
-    errPropertyIdNotFound: 'यह संपत्ति आईडी नमूना रिकॉर्ड में नहीं मिली। कृपया MUG-P-1001 आज़माएं।',
+    errPropertyIdNotFound: 'यह संपत्ति आईडी नमूना रिकॉर्ड में नहीं मिली। कृपया MHR-P-1001 आज़माएं।',
     ownerName: 'स्वामी का नाम',
     propertyAddress: 'पता',
     dueAmount: 'देय राशि',
@@ -668,23 +729,23 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     noRouteForWard: 'इस वार्ड के लिए मार्ग जानकारी लोड नहीं हो सकी।',
     viewAllRoutes: 'सभी मार्ग देखें',
 
-    templeTitle: 'देवतालाब शिव मंदिर व तीर्थयात्री सेवाएं',
-    templeSubtitle: 'मऊगंज देवतालाब दर्शन, बहुती प्रपात मार्ग, सुविधाएं एवं महाशिवरात्रि सूचनाएं',
+    templeTitle: 'माँ शारदा मंदिर व तीर्थयात्री सेवाएं',
+    templeSubtitle: 'मैहर त्रिकूट पर्वत दर्शन, सुविधाएं एवं नवरात्रि सूचनाएं',
     crowdLevelTitle: 'वर्तमान भीड़ स्तर (नमूना)',
-    crowdLow: 'कम भीड़ (लगभग 15-20 मिनट दर्शन समय)',
-    crowdMedium: 'मध्यम भीड़ (लगभग 40-50 मिनट)',
-    crowdHigh: 'अधिक भीड़ (लगभग 75+ मिनट)',
+    crowdLow: 'कम भीड़ (लगभग 20 मिनट दर्शन समय)',
+    crowdMedium: 'मध्यम भीड़ (लगभग 45-60 मिनट)',
+    crowdHigh: 'अधिक भीड़ (लगभग 90+ मिनट)',
     darshanTimingsTitle: 'दर्शन एवं आरती समय-सारणी',
-    ropewayStairsTitle: 'प्रवेश मार्ग एवं पर्यटन जानकारी',
+    ropewayStairsTitle: 'रोपवे एवं सीढ़ियों की जानकारी',
     parkingTitle: 'पार्किंग उपलब्धता (नमूना)',
     toiletsWaterTitle: 'अस्थायी शौचालय एवं पेयजल केंद्र',
-    festivalCalendarTitle: 'पर्व कैलेंडर एवं महाशिवरात्रि / श्रावण सूचनाएं',
+    festivalCalendarTitle: 'पर्व कैलेंडर एवं नवरात्रि सूचनाएं',
     lostFoundTitle: 'खोया-पाया रिपोर्ट फॉर्म',
     lostItemTab: 'सामान खोया है',
     foundItemTab: 'सामान मिला है',
     itemDescLabel: 'वस्तु / व्यक्ति का विवरण',
     itemDescPlaceholder: 'उदा. नीला बैग या मोबाइल फोन',
-    locationSeenPlaceholder: 'स्थान (उदा. देवतालाब मुख्य प्रवेश द्वार के पास)',
+    locationSeenPlaceholder: 'स्थान (उदा. रोपवे टिकट काउंटर के पास)',
     contactPhonePlaceholder: 'संपर्क मोबाइल नंबर (10 अंक)',
     submitLostFoundBtn: 'खोया-पाया रिपोर्ट दर्ज करें',
     lostFoundSubmitted: 'खोया-पाया रिपोर्ट सहायता केंद्र में दर्ज हो गई है।',
@@ -702,8 +763,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     certBirthDeathInfo: 'जन्म व मृत्यु प्रमाण-पत्र: घटना के 21 दिनों के भीतर निःशुल्क पंजीकरण। आवश्यक दस्तावेज़: अस्पताल डिस्चार्ज पर्ची, माता-पिता का पहचान पत्र।',
     certBuildingInfo: 'भवन निर्माण अनुज्ञा: भूखंड स्वामित्व दस्तावेज़, स्वीकृत मानचित्र व शपथ-पत्र के साथ ऑनलाइन आवेदन करें।',
     checkStatusTitle: 'आवेदन की स्थिति जांचें (नमूना)',
-    appIdPlaceholder: 'आवेदन संख्या दर्ज करें (उदा. MUG-BC-2026-101)',
-    sampleAppIdsHint: 'नमूना आईडी: MUG-BC-2026-101, MUG-DC-2026-204, MUG-BP-2026-309',
+    appIdPlaceholder: 'आवेदन संख्या दर्ज करें (उदा. MHR-BC-2026-101)',
+    sampleAppIdsHint: 'नमूना आईडी: MHR-BC-2026-101, MHR-DC-2026-204, MHR-BP-2026-309',
     checkStatusBtn: 'स्थिति देखें',
     errAppIdRequired: 'कृपया आवेदन संख्या दर्ज करें।',
     errAppIdNotFound: 'यह आवेदन संख्या नहीं मिली। कृपया नमूना आईडी आज़माएं।',
@@ -724,7 +785,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     resetConfirmBody: 'सभी नई शिकायतें, भुगतान और बदलाव हट जाएंगे और प्रारंभिक 12 नमूना शिकायतें वापस आ जाएंगी।',
     resetDoneToast: 'डेमो डेटा प्रारंभिक स्थिति में रीसेट हो गया।',
     signOutDemo: 'मोबाइल लॉगिन बदलें',
-    appVersionNote: 'मऊगंज नगर पालिका सेवा • स्वीकृति डेमो संस्करण',
+    appVersionNote: 'मैहर नगर पालिका सेवा • स्वीकृति डेमो संस्करण',
 
     officerRolePickerTitle: 'अधिकारी भूमिका चुनें (बिना पासवर्ड डेमो)',
     roleFieldStaff: 'फील्ड स्टाफ',
@@ -836,7 +897,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     deleteBtn: 'हटाएं',
     addNoticeBtn: 'नई सूचना प्रकाशित करें',
     broadcastPushLabel: 'नागरिकों को पुश सूचना भी भेजें',
-    templeLiveFeedTitle: 'देवतालाब शिव मंदिर लाइव फ़ीड',
+    templeLiveFeedTitle: 'माँ शारदा मंदिर लाइव फ़ीड',
     garbageLiveFeedTitle: 'कचरा वाहन लाइव रूट फ़ीड',
     liveFeedUpdatedToast: 'लाइव डेटा सफलतापूर्वक अपडेट हो गया।',
     departmentLabel: 'विभाग',
@@ -850,7 +911,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
 
     infoAndLegalSection: 'जानकारी एवं नीतियां',
     aboutTitle: 'हमारे बारे में',
-    aboutSub: 'मऊगंज नगर पालिका परिषद एवं ऐप का परिचय',
+    aboutSub: 'मैहर नगर पालिका परिषद एवं ऐप का परिचय',
     faqTitle: 'सामान्य प्रश्न (FAQs)',
     faqSub: 'शिकायत, कर भुगतान और सेवाओं से जुड़े प्रश्न',
     termsTitle: 'उपयोग की शर्तें',
@@ -858,7 +919,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     privacyTitle: 'गोपनीयता नीति',
     privacySub: 'आपका डेटा कैसे सुरक्षित और गोपनीय रखा जाता है',
     aboutIntro:
-      'मऊगंज नगर पालिका सेवा (Maugang Nagar Palika Seva) नगर पालिका परिषद, मऊगंज (मध्य प्रदेश) का एकीकृत डिजिटल नागरिक एवं तीर्थयात्री सेवा मंच है। इसका उद्देश्य नागरिकों को शिकायत निवारण, नगर कर भुगतान, कचरा वाहन ट्रैकिंग और श्री देवतालाब शिव मंदिर एवं पर्यटन से जुड़ी सुविधाएं सरल, पारदर्शी और समयबद्ध रूप से उपलब्ध कराना है।',
+      'मैहर नगर पालिका सेवा (Maihar Nagar Palika Seva) नगर पालिका परिषद, मैहर (मध्य प्रदेश) का एकीकृत डिजिटल नागरिक एवं तीर्थयात्री सेवा मंच है। इसका उद्देश्य नागरिकों को शिकायत निवारण, नगर कर भुगतान, कचरा वाहन ट्रैकिंग और माँ शारदा देवी मंदिर से जुड़ी सुविधाएं सरल, पारदर्शी और समयबद्ध रूप से उपलब्ध कराना है।',
     aboutMissionTitle: 'हमारा उद्देश्य',
     aboutMissionBody:
       'हर नागरिक की शिकायत सीधे संबंधित विभाग के अधिकारी और विभागीय फील्ड स्टाफ तक पहुंचे, तय SLA समय-सीमा में समाधान हो, और कार्य पूरा होने पर नागरिक स्वयं फोटो देखकर अपनी संतुष्टि या पुनः खोलने की प्रतिक्रिया दे सकें।',
@@ -866,15 +927,15 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       { label: 'कुल वार्ड', value: '15 वार्ड' },
       { label: 'सेवा विभाग', value: '7 विभाग' },
       { label: 'शिकायत ट्रैकिंग', value: '24×7 लाइव' },
-      { label: 'तीर्थयात्री सहायता', value: 'देवतालाब सेवा' },
+      { label: 'तीर्थयात्री सहायता', value: 'माँ शारदा सेवा' },
     ],
     aboutContactTitle: 'कार्यालय संपर्क',
     aboutContactBody:
-      'कार्यालय नगर पालिका परिषद, एलआईसी कार्यालय के पास, चक रोड, वार्ड 3, मऊगंज, जिला मऊगंज (म.प्र.) 486331 · कार्य समय: सोम–शनि, प्रातः 10:00 से सायं 5:30 तक।',
+      'कार्यालय नगर पालिका परिषद, घंटाघर चौक के पास, मैहर, जिला मैहर (म.प्र.) 485771 · कार्य समय: सोम–शनि, प्रातः 10:00 से सायं 5:30 तक।',
     faqItems: [
       {
         q: 'नई शिकायत कैसे दर्ज करें और उसकी स्थिति कैसे जानें?',
-        a: 'होम स्क्रीन पर "शिकायत दर्ज" चुनें, फोटो जोड़ें, श्रेणी चुनें, GPS या वार्ड/लैंडमार्क दर्ज करें और सबमिट करें। आपको MUG-2026-xxxx आईडी मिलेगी जिसे आप "शिकायत स्थिति" से कभी भी ट्रैक कर सकते हैं।',
+        a: 'होम स्क्रीन पर "शिकायत दर्ज" चुनें, फोटो जोड़ें, श्रेणी चुनें, GPS या वार्ड/लैंडमार्क दर्ज करें और सबमिट करें। आपको MHR-2026-xxxx आईडी मिलेगी जिसे आप "शिकायत स्थिति" से कभी भी ट्रैक कर सकते हैं।',
       },
       {
         q: 'क्या अन्य नागरिक मेरी शिकायतें देख सकते हैं?',
@@ -890,22 +951,22 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       },
       {
         q: 'क्या मैं इस ऐप से बिजली का बिल भी भर सकता हूँ?',
-        a: 'मऊगंज नगर पालिका केवल संपत्ति कर और जल कर संग्रह करती है। बिजली बिल का भुगतान मध्य प्रदेश पूर्व क्षेत्र विद्युत वितरण कंपनी (MPPKVVCL) के पोर्टल पर किया जाता है।',
+        a: 'मैहर नगर पालिका केवल संपत्ति कर और जल कर संग्रह करती है। बिजली बिल का भुगतान मध्य प्रदेश पूर्व क्षेत्र विद्युत वितरण कंपनी (MPPKVVCL) के पोर्टल पर किया जाता है।',
       },
       {
         q: 'कचरा वाहन ट्रैकिंग कैसे काम करती है?',
         a: '"कचरा वाहन" मॉड्यूल में अपना वार्ड चुनें। आपको अपने वार्ड के वाहन नंबर, रूट के स्टॉप और अनुमानित आगमन समय की जानकारी दिखाई देगी।',
       },
       {
-        q: 'देवतालाब शिव मंदिर दर्शन व खोया-पाया सेवा कैसे उपयोग करें?',
-        a: '"मंदिर सूचना" में दर्शन व आरती समय, भीड़ स्तर, प्रवेश व बहुती प्रपात मार्ग अपडेट, पार्किंग उपलब्धता और खोया-पाया रिपोर्ट फॉर्म एक ही जगह उपलब्ध है।',
+        q: 'माँ शारदा मंदिर दर्शन व खोया-पाया सेवा कैसे उपयोग करें?',
+        a: '"मंदिर जानकारी" में दर्शन व आरती समय, भीड़ स्तर, रोपवे अपडेट, पार्किंग उपलब्धता और खोया-पाया रिपोर्ट फॉर्म एक ही जगह उपलब्ध है।',
       },
     ],
     termsUpdatedLabel: 'अंतिम अद्यतन: 2026 (अनुमोदन डेमो संस्करण)',
     termsSections: [
       {
         heading: '1. सेवा का दायरा',
-        body: 'यह पोर्टल मऊगंज नगर पालिका परिषद की नागरिक सेवाओं—शिकायत निवारण, संपत्ति/जल कर जानकारी, कचरा संग्रहण समय-सारणी, नजदीकी सुविधाएं और तीर्थयात्री सहायता—के डिजिटल उपयोग के लिए प्रदान किया गया है।',
+        body: 'यह पोर्टल मैहर नगर पालिका परिषद की नागरिक सेवाओं—शिकायत निवारण, संपत्ति/जल कर जानकारी, कचरा संग्रहण समय-सारणी, नजदीकी सुविधाएं और तीर्थयात्री सहायता—के डिजिटल उपयोग के लिए प्रदान किया गया है।',
       },
       {
         heading: '2. नागरिक दायित्व एवं सही जानकारी',
@@ -913,7 +974,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       },
       {
         heading: '3. SLA समय-सीमा एवं एस्केलेशन',
-        body: 'प्रदर्शित SLA समय-सीमाएं मानक सेवा लक्ष्य हैं। आपातकालीन स्थितियों, भारी वर्षा या प्रमुख पर्व (जैसे महाशिवरात्रि व श्रावण मेला) के दौरान कार्य-समय में व्यावहारिक परिवर्तन संभव है।',
+        body: 'प्रदर्शित SLA समय-सीमाएं मानक सेवा लक्ष्य हैं। आपातकालीन स्थितियों, भारी वर्षा या प्रमुख पर्व (जैसे नवरात्रि मेला) के दौरान कार्य-समय में व्यावहारिक परिवर्तन संभव है।',
       },
       {
         heading: '4. कर भुगतान एवं रसीद',
@@ -944,14 +1005,41 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       },
       {
         heading: '5. गोपनीयता संपर्क',
-        body: 'डेटा सुधार या गोपनीयता संबंधी किसी भी प्रश्न के लिए नगर पालिका परिषद मऊगंज के आईटी एवं नागरिक सुविधा केंद्र से संपर्क किया जा सकता है।',
+        body: 'डेटा सुधार या गोपनीयता संबंधी किसी भी प्रश्न के लिए नगर पालिका परिषद मैहर के आईटी एवं नागरिक सुविधा केंद्र से संपर्क किया जा सकता है।',
+      },
+    ],
+
+    frontCityTagline: 'नगर पालिका परिषद, मैहर · मध्य प्रदेश',
+    frontServicesTitle: 'मैहर नगर की सभी सेवाएं',
+    frontServicesSub: 'नागरिक व तीर्थयात्री सेवाओं के लिए नीचे किसी भी विकल्प पर टैप करें',
+    frontAuthTitle: 'नागरिक खाता — लॉगिन या पंजीकरण',
+    frontAuthSub: 'शिकायत दर्ज करने, स्थिति ट्रैक करने और नगर कर भुगतान के लिए प्रवेश करें।',
+    frontLoginCta: 'लॉगिन करें',
+    frontRegisterCta: 'नया पंजीकरण',
+    frontLoginRequiredToast: 'इस सेवा का उपयोग करने के लिए कृपया नागरिक लॉगिन या पंजीकरण करें।',
+    frontCarouselSlides: [
+      {
+        title: 'माँ शारदा देवी मंदिर, त्रिकूट पर्वत',
+        subtitle: 'दर्शन समय, रोपवे, पार्किंग और तीर्थयात्री सहायता',
+      },
+      {
+        title: 'घंटाघर चौक एवं मैहर नगर पालिका',
+        subtitle: '15 वार्डों में पारदर्शी एवं समयबद्ध नागरिक सेवाएं',
+      },
+      {
+        title: 'स्वच्छ एवं हरित मैहर अभियान',
+        subtitle: 'डोर-टू-डोर कचरा वाहन ट्रैकिंग व स्वच्छता शिकायत निवारण',
+      },
+      {
+        title: 'मैहर सांस्कृतिक धरोहर एवं उद्यान',
+        subtitle: 'नगर सूचना पट्ट, नजदीकी सुविधाएं व आपातकालीन हेल्पलाइन',
       },
     ],
   },
 
   en: {
-    appName: 'Maugang Nagar Palika Seva',
-    appShort: 'Maugang Seva',
+    appName: 'Maihar Nagar Palika Seva',
+    appShort: 'Maihar Seva',
     demoBanner: 'Demo version, sample data. OTP 1234.',
     citizenApp: 'Citizen app',
     officerApp: 'Officer app',
@@ -987,7 +1075,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     navNearby: 'Nearby',
     navProfile: 'Profile',
 
-    onboardingWelcome: 'Welcome to Maugang Nagar Palika Seva',
+    onboardingWelcome: 'Welcome to Maihar Nagar Palika Seva',
     onboardingSubtitle: 'Grievance redressal, municipal taxes, garbage van tracking, and pilgrim services in one portal.',
     chooseLanguage: 'Choose your language',
     enterMobileTitle: 'Sign in with mobile number',
@@ -1024,15 +1112,6 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     myActiveComplaints: 'My active complaints',
     noActiveComplaints: 'You have no active complaints right now.',
     noActiveComplaintsAction: 'Tap "Report a problem" above to submit a municipal issue.',
-    frontCarouselAria: 'Maugang city highlights',
-    frontAuthTitle: 'Citizen Account — Register & Login',
-    frontAuthSubtitle: 'Create an account or sign in with your mobile number to report issues, track grievances, and receive ward alerts.',
-    frontRegisterBtn: 'Register',
-    frontLoginBtn: 'Login',
-    guestAuthRequiredNote: 'Please login or register with your mobile number to access this personal service.',
-    guestProfileTitle: 'Sign in to Citizen Portal',
-    guestProfileSubtitle: 'Register or login to file complaints, track your ward updates, and manage your profile.',
-    backToFrontPage: 'Front Page',
 
     reportStepTitle: 'Report a problem',
     step1Photo: '1. Add photo',
@@ -1050,10 +1129,10 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     slaTarget: 'SLA target:',
     detectGpsBtn: 'Detect my GPS location',
     gpsDetected: 'GPS location captured',
-    gpsSimulatedNote: 'Demo mode: Used Maugang ward centre GPS coordinates.',
+    gpsSimulatedNote: 'Demo mode: Used Maihar ward centre GPS coordinates.',
     gpsFallbackNote: 'If GPS is unavailable, select your ward and enter a landmark below.',
     landmarkLabel: 'Nearest landmark / street address',
-    landmarkPlaceholder: 'e.g. Near Chhoti Bazar Chowk main road',
+    landmarkPlaceholder: 'e.g. Near Ghantaghar Chowk main road',
     descriptionLabel: 'Additional description',
     descriptionPlaceholder: 'Describe the issue briefly...',
     voiceNoteBtn: 'Record voice note (Demo)',
@@ -1067,7 +1146,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     errEnterLandmark: 'Please enter a nearby landmark or address.',
     errSelectWard: 'Please select your ward.',
     trackComplaintsTitle: 'Track complaints',
-    searchByIdPlaceholder: 'Search by ID or landmark (e.g. MUG-2026-0001)',
+    searchByIdPlaceholder: 'Search by ID or landmark (e.g. MHR-2026-0001)',
     noComplaintsFound: 'No complaints match this filter.',
     noComplaintsHint: 'Try clearing your filter or register a new complaint.',
     complaintDetailTitle: 'Complaint details',
@@ -1109,21 +1188,55 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     },
 
     servicesHubTitle: 'Municipal Services',
-    servicesHubSub: 'All Maugang Nagar Palika citizen services',
+    servicesHubSub: 'All Maihar Nagar Palika citizen services',
     serviceCityInfo: 'City & Nagar Palika Info',
     serviceCityInfoSub: 'Department contacts, councillors, tenders, certificates',
     serviceBillsSub: 'Property tax, water tax & electricity info',
     serviceHelplinesSub: 'Fire, ambulance, police & municipal helplines',
     serviceGarbageSub: 'Waste collection routes & estimated arrival',
-    serviceTempleSub: 'Devtalab Shiv Mandir timings, crowd, parking & lost/found',
+    serviceTempleSub: 'Maa Sharda Devi timings, crowd, parking & lost/found',
     serviceTrackSub: 'Track status & timeline of registered grievances',
+    appIssuesTitle: 'App Related Issues',
+    appIssuesSub: 'Direct grievance to Municipal Admin for app issues',
+    aboutAppTitle: 'About App',
+    aboutAppSub: 'Version v2.1.0 & IT administration details',
+    achievementsTitle: 'Works Done by Nagar Palika',
+    achievementsSub: 'Major development works & milestones completed by Nagar Palika',
+    newsTitle: 'City News Updates',
+    newsSub: "Daily municipal bulletin, announcements & today's civic news",
+    achievementsFilterAll: 'All Works',
+    newsFilterAll: 'All News',
+    newsBreakingBadge: 'Breaking Update',
+    newsTodayLive: "Today's Daily Bulletin",
+    tankerBookingTitle: 'Water Tanker Booking',
+    tankerBookingSub: 'Request emergency or event water tanker from Nagar Palika',
+    jcbBookingTitle: 'JCB & Machinery Booking',
+    jcbBookingSub: 'Book municipal JCB earthmover for debris removal & excavation',
+    cameraOnlyPrompt: 'Capture Photo Using Live Camera',
+    liveCameraSecurityNote: 'Security Rule: Only live photographs taken at the spot are accepted. Gallery upload is restricted.',
+    openCameraBtn: 'Open Live Camera',
+    capturePhotoBtn: 'Capture Photo',
+    retakePhotoBtn: 'Retake Photo',
+    cameraPermissionDenied: 'Camera access denied. Please allow camera access in browser settings.',
+    cameraSwitchBtn: 'Switch Camera',
+    vehicleLiveLocationTitle: 'Current Vehicle Location (Live Tracking)',
+    vehicleCurrentStatus: 'Waste Collection In Progress',
+    liveGpsTracking: 'AIS-140 Live GPS',
+    speedLabel: 'Speed',
+    lastPingLabel: 'Last Signal',
+    stopsTimelineTitle: 'Route Stops & Collection Progress',
+    completedStopLabel: 'Waste Collected',
+    currentStopLabel: 'Vehicle Is Here Right Now',
+    upcomingStopLabel: 'Upcoming Stop',
+    setArrivalAlertBtn: 'Set Arrival Alert',
+    arrivalAlertSetMsg: 'Arrival alert set for your ward',
 
     helplinesTitle: 'Emergency Helplines',
     helplinesDisclaimer: 'Notice: All numbers below are obvious sample placeholders for demo review only.',
     tapToCall: 'Call',
     simulatedCallNotice: 'Opening demo dialer for:',
 
-    nearbyTitle: "What's Near Me (Maugang)",
+    nearbyTitle: "What's Near Me (Maihar)",
     listView: 'List',
     mapView: 'Map',
     getDirections: 'Get directions',
@@ -1136,14 +1249,14 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     propertyTax: 'Property Tax',
     waterTax: 'Water Tax',
     electricityInfoTile: 'Electricity Bill (Information Only)',
-    electricityInfoDesc: 'Electricity supply in Maugang is managed by MP Poorv Kshetra Vidyut Vitaran Co. (MPPKVVCL). Please pay electricity bills on the state utility portal.',
-    electricityPortalNote: 'Maugang Nagar Palika collects only Property Tax and Water Tax.',
+    electricityInfoDesc: 'Electricity supply in Maihar is managed by MP Poorv Kshetra Vidyut Vitaran Co. (MPPKVVCL). Please pay electricity bills on the state utility portal.',
+    electricityPortalNote: 'Maihar Nagar Palika collects only Property Tax and Water Tax.',
     enterPropertyId: 'Enter Property ID',
-    propertyIdPlaceholder: 'e.g. MUG-P-1001',
-    sampleIdsHint: 'Sample IDs: MUG-P-1001, MUG-P-1002, MUG-P-1003',
+    propertyIdPlaceholder: 'e.g. MHR-P-1001',
+    sampleIdsHint: 'Sample IDs: MHR-P-1001, MHR-P-1002, MHR-P-1003',
     fetchDuesBtn: 'Fetch Dues',
     errPropertyIdRequired: 'Please enter a Property ID.',
-    errPropertyIdNotFound: 'Property ID not found in sample records. Try MUG-P-1001.',
+    errPropertyIdNotFound: 'Property ID not found in sample records. Try MHR-P-1001.',
     ownerName: 'Owner name',
     propertyAddress: 'Address',
     dueAmount: 'Due amount',
@@ -1179,22 +1292,22 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     viewAllRoutes: 'View all routes',
 
     templeTitle: 'Temple & Pilgrim Services',
-    templeSubtitle: 'Devtalab Shiv Mandir darshan, Bahuti Waterfall access & festival notices',
+    templeSubtitle: 'Maa Sharda Devi Mandir darshan, pilgrim facilities & Navratri notices',
     crowdLevelTitle: 'Current Crowd Level (Sample)',
-    crowdLow: 'Low crowd (~15-20 min darshan wait)',
-    crowdMedium: 'Medium crowd (~40-50 min wait)',
-    crowdHigh: 'High crowd (~75+ min wait)',
+    crowdLow: 'Low crowd (~20 min darshan wait)',
+    crowdMedium: 'Medium crowd (~45-60 min wait)',
+    crowdHigh: 'High crowd (~90+ min wait)',
     darshanTimingsTitle: 'Darshan & Aarti Timings',
-    ropewayStairsTitle: 'Temple Access & Tourism Info',
+    ropewayStairsTitle: 'Ropeway & Stairs Information',
     parkingTitle: 'Parking Availability (Sample)',
     toiletsWaterTitle: 'Temporary Toilets & Water Points',
-    festivalCalendarTitle: 'Festival Calendar & Maha Shivratri Notices',
+    festivalCalendarTitle: 'Festival Calendar & Navratri Notices',
     lostFoundTitle: 'Lost & Found Report Form',
     lostItemTab: 'Lost item',
     foundItemTab: 'Found item',
     itemDescLabel: 'Item / person description',
     itemDescPlaceholder: 'e.g. Blue backpack or mobile phone',
-    locationSeenPlaceholder: 'Location (e.g. Near Devtalab main entrance gate)',
+    locationSeenPlaceholder: 'Location (e.g. Near ropeway ticket counter)',
     contactPhonePlaceholder: 'Contact mobile (10 digits)',
     submitLostFoundBtn: 'Submit Lost & Found Report',
     lostFoundSubmitted: 'Lost & Found report logged at pilgrim helpdesk.',
@@ -1212,8 +1325,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     certBirthDeathInfo: 'Birth & Death Certificates: Free registration within 21 days of event. Required: hospital discharge slip and parent/applicant ID.',
     certBuildingInfo: 'Building Permission: Apply online with land ownership deed, approved site plan, and affidavit.',
     checkStatusTitle: 'Check Application Status (Sample)',
-    appIdPlaceholder: 'Enter Application ID (e.g. MUG-BC-2026-101)',
-    sampleAppIdsHint: 'Sample IDs: MUG-BC-2026-101, MUG-DC-2026-204, MUG-BP-2026-309',
+    appIdPlaceholder: 'Enter Application ID (e.g. MHR-BC-2026-101)',
+    sampleAppIdsHint: 'Sample IDs: MHR-BC-2026-101, MHR-DC-2026-204, MHR-BP-2026-309',
     checkStatusBtn: 'Check Status',
     errAppIdRequired: 'Please enter an application ID.',
     errAppIdNotFound: 'Application ID not found. Try one of the sample IDs below.',
@@ -1234,7 +1347,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     resetConfirmBody: 'All new complaints, payments, and edits will be cleared and the 12 initial sample complaints will be restored.',
     resetDoneToast: 'Demo data restored to initial sample state.',
     signOutDemo: 'Change mobile login',
-    appVersionNote: 'Maugang Nagar Palika Seva • Approval Demo Build',
+    appVersionNote: 'Maihar Nagar Palika Seva • Approval Demo Build',
 
     officerRolePickerTitle: 'Select Officer Role (No password)',
     roleFieldStaff: 'Field Staff',
@@ -1346,7 +1459,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     deleteBtn: 'Delete',
     addNoticeBtn: 'Publish New Notice',
     broadcastPushLabel: 'Also send in-app Push notification to citizens',
-    templeLiveFeedTitle: 'Devtalab Shiv Temple Live Feed',
+    templeLiveFeedTitle: 'Maa Sharda Temple Live Feed',
     garbageLiveFeedTitle: 'Garbage Van Live Route Feed',
     liveFeedUpdatedToast: 'Live data feed updated across the app.',
     departmentLabel: 'Department',
@@ -1360,7 +1473,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
 
     infoAndLegalSection: 'Information & Legal',
     aboutTitle: 'About Us',
-    aboutSub: 'About Maugang Nagar Palika Parishad & this portal',
+    aboutSub: 'About Maihar Nagar Palika Parishad & this portal',
     faqTitle: 'FAQs',
     faqSub: 'Common questions about complaints, taxes & services',
     termsTitle: 'Terms of Use',
@@ -1368,7 +1481,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     privacyTitle: 'Privacy Policy',
     privacySub: 'How your citizen data is kept private and secure',
     aboutIntro:
-      'Maugang Nagar Palika Seva is the unified digital citizen and pilgrim services platform for Maugang Nagar Palika Parishad, District Maugang (Madhya Pradesh). It brings grievance redressal, municipal tax services, garbage van tracking, city information, and Devtalab Shiv Mandir & Bahuti Waterfall visitor support into one accessible mobile portal.',
+      'Maihar Nagar Palika Seva is the unified digital citizen and pilgrim services platform for Maihar Nagar Palika Parishad, District Maihar (Madhya Pradesh). It brings grievance redressal, municipal tax services, garbage van tracking, city information, and Maa Sharda Devi temple pilgrim support into one accessible mobile portal.',
     aboutMissionTitle: 'Our Mission',
     aboutMissionBody:
       'Every citizen grievance is routed directly to the concerned municipal department officer and departmental field staff, tracked against clear SLA timelines, and closed only after before/after verification and citizen feedback.',
@@ -1376,15 +1489,15 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       { label: 'Municipal Wards', value: '15 Wards' },
       { label: 'Service Wings', value: '7 Depts' },
       { label: 'Grievance Tracking', value: '24×7 Live' },
-      { label: 'Pilgrim Support', value: 'Devtalab Seva' },
+      { label: 'Pilgrim Support', value: 'Maa Sharda' },
     ],
     aboutContactTitle: 'Municipal Office Contact',
     aboutContactBody:
-      'Office of Nagar Palika Parishad, Near LIC Office, Chak Road, Ward 3, Maugang, District Maugang (M.P.) 486331 · Office Hours: Mon–Sat, 10:00 AM – 5:30 PM.',
+      'Office of Nagar Palika Parishad, Near Ghantaghar Chowk, Maihar, District Maihar (M.P.) 485771 · Office Hours: Mon–Sat, 10:00 AM – 5:30 PM.',
     faqItems: [
       {
         q: 'How do I submit a complaint and track its progress?',
-        a: 'Tap "Report Issue" from Home, add a photo, select a category, set GPS or ward/landmark, and submit. You receive a unique ID (MUG-2026-xxxx) to track live updates under "Track complaint".',
+        a: 'Tap "Report Issue" from Home, add a photo, select a category, set GPS or ward/landmark, and submit. You receive a unique ID (MHR-2026-xxxx) to track live updates under "Track complaint".',
       },
       {
         q: 'Can other citizens view my submitted complaints?',
@@ -1400,22 +1513,22 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       },
       {
         q: 'Can I pay electricity bills through this app?',
-        a: 'Maugang Nagar Palika collects only Property Tax and Water Tax. Electricity supply and billing are managed by MP Poorv Kshetra Vidyut Vitaran Co. (MPPKVVCL).',
+        a: 'Maihar Nagar Palika collects only Property Tax and Water Tax. Electricity supply and billing are managed by MP Poorv Kshetra Vidyut Vitaran Co. (MPPKVVCL).',
       },
       {
         q: 'How does Garbage Van Tracking work?',
         a: 'Open the "Garbage van" section and pick your ward to check the assigned collection vehicle, route stops, schedule, and estimated arrival time.',
       },
       {
-        q: 'What pilgrim services are included for Devtalab Shiv Temple?',
-        a: 'Under "Temple info", pilgrims can check daily darshan & aarti timings, live crowd level, temple access & Bahuti Waterfall updates, parking availability, and submit Lost & Found reports.',
+        q: 'What pilgrim services are included for Maa Sharda Devi Temple?',
+        a: 'Under "Temple info", pilgrims can check daily darshan & aarti timings, live crowd level, ropeway & stair updates, parking availability, and submit Lost & Found reports.',
       },
     ],
     termsUpdatedLabel: 'Last updated: 2026 (Approval Demo Build)',
     termsSections: [
       {
         heading: '1. Scope of Services',
-        body: 'This portal provides digital access to Maugang Nagar Palika Parishad services including grievance reporting, municipal property and water tax utilities, waste collection tracking, local civic directories, and pilgrim assistance.',
+        body: 'This portal provides digital access to Maihar Nagar Palika Parishad services including grievance reporting, municipal property and water tax utilities, waste collection tracking, local civic directories, and pilgrim assistance.',
       },
       {
         heading: '2. Citizen Responsibilities',
@@ -1423,7 +1536,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       },
       {
         heading: '3. Service Level Agreements (SLA)',
-        body: 'Displayed SLA targets represent standard resolution timelines per municipal wing. Actual resolution times may vary during extreme weather, emergencies, or major festival periods such as Maha Shivratri and Shravan Mela.',
+        body: 'Displayed SLA targets represent standard resolution timelines per municipal wing. Actual resolution times may vary during extreme weather, emergencies, or major festival periods such as Navratri Mela.',
       },
       {
         heading: '4. Municipal Tax Payments & Receipts',
@@ -1442,7 +1555,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       },
       {
         heading: '2. How Your Data Is Used',
-        body: 'Your information is used solely to route complaints to the appropriate municipal department and field staff, deliver status notifications, and improve civic service delivery in Maugang.',
+        body: 'Your information is used solely to route complaints to the appropriate municipal department and field staff, deliver status notifications, and improve civic service delivery in Maihar.',
       },
       {
         heading: '3. Strict Access Isolation & Confidentiality',
@@ -1454,7 +1567,34 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       },
       {
         heading: '5. Privacy Contact',
-        body: 'For data correction requests or privacy inquiries, please contact the Citizen Facilitation & IT Cell at Nagar Palika Parishad, Maugang.',
+        body: 'For data correction requests or privacy inquiries, please contact the Citizen Facilitation & IT Cell at Nagar Palika Parishad, Maihar.',
+      },
+    ],
+
+    frontCityTagline: 'Nagar Palika Parishad, Maihar · Madhya Pradesh',
+    frontServicesTitle: 'Maihar City Services',
+    frontServicesSub: 'Tap any municipal or pilgrim service below to explore',
+    frontAuthTitle: 'Citizen Account — Login or Register',
+    frontAuthSub: 'Sign in or register to report civic issues, track status, and pay municipal taxes.',
+    frontLoginCta: 'Login',
+    frontRegisterCta: 'Register',
+    frontLoginRequiredToast: 'Please login or register with your mobile number to use this service.',
+    frontCarouselSlides: [
+      {
+        title: 'Maa Sharda Devi Mandir, Trikuta Hill',
+        subtitle: 'Darshan timings, ropeway status, parking & pilgrim support',
+      },
+      {
+        title: 'Ghantaghar Chowk & Municipal Center',
+        subtitle: 'Transparent, SLA-tracked civic services across all 15 wards',
+      },
+      {
+        title: 'Clean & Green Maihar Initiative',
+        subtitle: 'Live garbage van routes & fast sanitation redressal',
+      },
+      {
+        title: 'Maihar Heritage & Public Parks',
+        subtitle: 'City notices, nearby facilities & emergency helplines',
       },
     ],
   },

@@ -12,6 +12,7 @@ import {
   Truck,
   UserPlus,
   Users,
+  Wrench,
 } from 'lucide-react';
 import { CATEGORIES } from '../../constants';
 import { StatusBadge } from '../../components/StatusBadge';
@@ -52,6 +53,7 @@ export const AdminPortalView: React.FC = () => {
 
   const [tab, setTab] = useState<AdminTab>('employees');
   const [viewingComplaintId, setViewingComplaintId] = useState<string | null>(null);
+  const [requestFilter, setRequestFilter] = useState<'all' | 'app_issues' | 'municipal'>('all');
 
   // --- Employees Form State ---
   const [showAddEmp, setShowAddEmp] = useState(false);
@@ -216,12 +218,12 @@ export const AdminPortalView: React.FC = () => {
     label: string;
     icon: React.ComponentType<{ className?: string }>;
   }[] = [
-    { id: 'employees', label: t.adminTabEmployees, icon: Users },
-    { id: 'notices', label: t.adminTabNotices, icon: Megaphone },
-    { id: 'live_feeds', label: t.adminTabLiveFeeds, icon: Radio },
-    { id: 'city_info', label: t.adminTabCityInfo, icon: Building2 },
-    { id: 'requests', label: t.adminTabRequests, icon: ClipboardList },
-  ];
+      { id: 'employees', label: t.adminTabEmployees, icon: Users },
+      { id: 'notices', label: t.adminTabNotices, icon: Megaphone },
+      { id: 'live_feeds', label: t.adminTabLiveFeeds, icon: Radio },
+      { id: 'city_info', label: t.adminTabCityInfo, icon: Building2 },
+      { id: 'requests', label: t.adminTabRequests, icon: ClipboardList },
+    ];
 
   return (
     <div className="p-3.5 space-y-3.5">
@@ -373,17 +375,16 @@ export const AdminPortalView: React.FC = () => {
                               ? empDeptCat.deptHi
                               : empDeptCat.deptEn
                             : language === 'hi'
-                            ? 'सभी विभाग'
-                            : 'All Departments'}
+                              ? 'सभी विभाग'
+                              : 'All Departments'}
                         </span>
                       </div>
                     </div>
                     <span
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${
-                        emp.active
+                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${emp.active
                           ? 'bg-[var(--mnp-success-bg)] text-[var(--mnp-success)]'
                           : 'bg-[var(--mnp-error-bg)] text-[var(--mnp-error)]'
-                      }`}
+                        }`}
                     >
                       {emp.active ? t.activeLabel : t.inactiveLabel}
                     </span>
@@ -493,7 +494,7 @@ export const AdminPortalView: React.FC = () => {
                 >
                   <option value="notice">{language === 'hi' ? 'सामान्य सूचना' : 'General Notice'}</option>
                   <option value="tender">{language === 'hi' ? 'निविदा (Tender)' : 'Tender'}</option>
-                  <option value="navratri">{language === 'hi' ? 'पर्व / मंदिर सूचना' : 'Festival / Temple'}</option>
+                  <option value="navratri">{language === 'hi' ? 'नवरात्रि / मंदिर सूचना' : 'Navratri / Temple'}</option>
                 </select>
                 <input
                   type="text"
@@ -570,10 +571,10 @@ export const AdminPortalView: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 3: REAL-TIME DATA FEEDS (Temple Crowd/Parking/Access + Garbage Van Live Status) */}
+      {/* TAB 3: REAL-TIME DATA FEEDS (Temple Crowd/Parking/Ropeway + Garbage Van Live Status) */}
       {tab === 'live_feeds' && (
         <div className="space-y-4">
-          {/* Devtalab Shiv Temple Live Feed */}
+          {/* Maa Sharda Temple Live Feed */}
           <section className={`${UI.card} p-3.5 space-y-3`}>
             <h2 className={`${UI.sectionTitle} flex items-center gap-1.5`}>
               <Radio className="w-4 h-4 text-[var(--mnp-accent)]" />
@@ -591,23 +592,22 @@ export const AdminPortalView: React.FC = () => {
                     key={lvl}
                     type="button"
                     onClick={() => updateTempleFeed({ crowdLevel: lvl })}
-                    className={`min-h-[44px] rounded-[10px] border text-xs font-bold ${
-                      templeFeed.crowdLevel === lvl
+                    className={`min-h-[44px] rounded-[10px] border text-xs font-bold ${templeFeed.crowdLevel === lvl
                         ? 'bg-[var(--mnp-primary)] text-white border-[var(--mnp-primary)]'
                         : 'bg-[var(--mnp-surface-muted)] text-[var(--mnp-text-secondary)] border-[var(--mnp-border)]'
-                    }`}
+                      }`}
                   >
                     {lvl === 'low'
                       ? language === 'hi'
                         ? 'कम भीड़'
                         : 'Low'
                       : lvl === 'medium'
-                      ? language === 'hi'
-                        ? 'मध्यम'
-                        : 'Medium'
-                      : language === 'hi'
-                      ? 'अधिक भीड़'
-                      : 'High'}
+                        ? language === 'hi'
+                          ? 'मध्यम'
+                          : 'Medium'
+                        : language === 'hi'
+                          ? 'अधिक भीड़'
+                          : 'High'}
                   </button>
                 ))}
               </div>
@@ -762,17 +762,16 @@ export const AdminPortalView: React.FC = () => {
                 key={sub}
                 type="button"
                 onClick={() => setInfoSubTab(sub)}
-                className={`min-h-[38px] rounded-[8px] text-[11px] font-bold ${
-                  infoSubTab === sub
+                className={`min-h-[38px] rounded-[8px] text-[11px] font-bold ${infoSubTab === sub
                     ? 'bg-[var(--mnp-primary)] text-white'
                     : 'text-[var(--mnp-text-secondary)]'
-                }`}
+                  }`}
               >
                 {sub === 'contacts'
                   ? t.tabContacts
                   : sub === 'wards'
-                  ? t.tabWards
-                  : t.tileHelplines}
+                    ? t.tabWards
+                    : t.tileHelplines}
               </button>
             ))}
           </div>
@@ -817,7 +816,7 @@ export const AdminPortalView: React.FC = () => {
                       type="text"
                       value={ctPhone}
                       onChange={(e) => setCtPhone(e.target.value)}
-                      placeholder="07663-000399"
+                      placeholder="07674-000399"
                       className={UI.input}
                     />
                   </div>
@@ -1031,41 +1030,126 @@ export const AdminPortalView: React.FC = () => {
       )}
 
       {/* TAB 5: ALL CITIZEN REQUESTS */}
-      {tab === 'requests' && (
-        <div className="space-y-2.5">
-          <h2 className={UI.sectionTitle}>
-            {t.allRequestsTab} ({complaints.length})
-          </h2>
-          {complaints.map((c) => {
-            const cat = CATEGORIES.find((x) => x.id === c.category);
-            return (
+      {tab === 'requests' && (() => {
+        const appIssuesCount = complaints.filter((c) => c.category === 'app_issue').length;
+        const filteredComplaints = complaints.filter((c) => {
+          if (requestFilter === 'app_issues') return c.category === 'app_issue';
+          if (requestFilter === 'municipal') return c.category !== 'app_issue';
+          return true;
+        });
+
+        return (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className={UI.sectionTitle}>
+                {t.allRequestsTab} ({complaints.length})
+              </h2>
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="flex flex-wrap gap-1.5 p-1 rounded-[10px] bg-[var(--mnp-surface-muted)] border border-[var(--mnp-border)]">
               <button
-                key={c.id}
                 type="button"
-                onClick={() => setViewingComplaintId(c.id)}
-                className={`${UI.cardInteractive} w-full p-3 text-left space-y-1.5`}
+                onClick={() => setRequestFilter('all')}
+                className={`px-3 py-1.5 rounded-[8px] text-xs font-bold transition-colors ${requestFilter === 'all'
+                    ? 'bg-[var(--mnp-primary)] text-white shadow-xs'
+                    : 'text-[var(--mnp-text-muted)] hover:text-[var(--mnp-text)]'
+                  }`}
               >
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold text-[var(--mnp-primary)] tabular-nums">
-                    {c.id} · {t.wardLabel} {c.ward}
-                  </span>
-                  <StatusBadge status={c.status} />
-                </div>
-                <div className="text-sm font-bold text-[var(--mnp-text)]">
-                  {cat ? (language === 'hi' ? cat.labelHi : cat.labelEn) : c.category}
-                </div>
-                <div className="flex items-center justify-between text-xs text-[var(--mnp-text-muted)]">
-                  <span className="truncate">{c.name} · {c.landmark}</span>
-                  <span className="text-[var(--mnp-primary)] font-bold inline-flex items-center gap-1 shrink-0 ml-2">
-                    <Eye className="w-3.5 h-3.5" />
-                    {t.viewRequestBtn}
-                  </span>
-                </div>
+                {language === 'hi' ? 'सभी अनुरोध' : 'All Requests'} ({complaints.length})
               </button>
-            );
-          })}
-        </div>
-      )}
+              <button
+                type="button"
+                onClick={() => setRequestFilter('app_issues')}
+                className={`px-3 py-1.5 rounded-[8px] text-xs font-bold transition-colors flex items-center gap-1.5 ${requestFilter === 'app_issues'
+                    ? 'bg-purple-600 text-white shadow-xs'
+                    : 'text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-950/30'
+                  }`}
+              >
+                <Wrench className="w-3.5 h-3.5" />
+                <span>{language === 'hi' ? 'ऐप समस्याएं' : 'App Issues'}</span>
+                <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20 font-mono">
+                  {appIssuesCount}
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setRequestFilter('municipal')}
+                className={`px-3 py-1.5 rounded-[8px] text-xs font-bold transition-colors ${requestFilter === 'municipal'
+                    ? 'bg-[var(--mnp-primary)] text-white shadow-xs'
+                    : 'text-[var(--mnp-text-muted)] hover:text-[var(--mnp-text)]'
+                  }`}
+              >
+                {language === 'hi' ? 'नागरिक समस्याएं' : 'Municipal Grievances'} (
+                {complaints.length - appIssuesCount})
+              </button>
+            </div>
+
+            {filteredComplaints.length === 0 ? (
+              <div className={`${UI.card} p-6 text-center text-xs text-[var(--mnp-text-muted)] space-y-1`}>
+                <p className="font-bold">
+                  {language === 'hi' ? 'कोई शिकायत नहीं मिली' : 'No requests found'}
+                </p>
+                <p>
+                  {requestFilter === 'app_issues'
+                    ? language === 'hi'
+                      ? 'वर्तमान में कोई ऐप संबंधित शिकायत लंबित नहीं है।'
+                      : 'No app related issues currently pending.'
+                    : ''}
+                </p>
+              </div>
+            ) : (
+              filteredComplaints.map((c) => {
+                const cat = CATEGORIES.find((x) => x.id === c.category);
+                const isAppIssue = c.category === 'app_issue';
+
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={() => setViewingComplaintId(c.id)}
+                    className={`${UI.cardInteractive} w-full p-3.5 text-left space-y-2 ${isAppIssue ? 'border-l-4 border-l-purple-600' : ''
+                      }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-[var(--mnp-primary)] tabular-nums">
+                          {c.id}
+                        </span>
+                        {isAppIssue ? (
+                          <span className="inline-flex items-center gap-1 bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                            <Wrench className="w-3 h-3" />
+                            <span>{language === 'hi' ? 'सीधे Admin को' : 'Direct to Admin'}</span>
+                          </span>
+                        ) : (
+                          <span className="text-xs text-[var(--mnp-text-muted)]">
+                            {t.wardLabel} {c.ward}
+                          </span>
+                        )}
+                      </div>
+                      <StatusBadge status={c.status} />
+                    </div>
+
+                    <div className="text-sm font-bold text-[var(--mnp-text)]">
+                      {cat ? (language === 'hi' ? cat.labelHi : cat.labelEn) : c.category}
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs text-[var(--mnp-text-muted)]">
+                      <span className="truncate">
+                        {c.name} · {c.landmark}
+                      </span>
+                      <span className="text-[var(--mnp-primary)] font-bold inline-flex items-center gap-1 shrink-0 ml-2">
+                        <Eye className="w-3.5 h-3.5" />
+                        {t.viewRequestBtn}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })
+            )}
+          </div>
+        );
+      })()}
     </div>
   );
 };

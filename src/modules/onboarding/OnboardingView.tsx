@@ -27,13 +27,11 @@ import { useApp } from '../../store/AppContext';
 interface OnboardingViewProps {
   initialTab?: 'login' | 'register';
   onBack?: () => void;
-  contextNotice?: string;
 }
 
 export const OnboardingView: React.FC<OnboardingViewProps> = ({
   initialTab = 'login',
   onBack,
-  contextNotice,
 }) => {
   const {
     language,
@@ -62,9 +60,6 @@ export const OnboardingView: React.FC<OnboardingViewProps> = ({
     setError('');
     setOtp('');
     setMobile(initialTab === 'login' ? DEFAULT_CITIZEN_MOBILE : '');
-    if (initialTab === 'register') {
-      setName('');
-    }
   }, [initialTab]);
 
   useEffect(() => {
@@ -157,22 +152,23 @@ export const OnboardingView: React.FC<OnboardingViewProps> = ({
 
   return (
     <div className="flex-1 overflow-y-auto phone-scroll bg-[var(--mnp-surface)] flex flex-col">
-      {/* Minimal Top Bar with Back + Language Switch */}
-      <div className="px-4 pt-3.5 flex items-center justify-between gap-2">
-        {onBack ? (
-          <button
-            type="button"
-            onClick={onBack}
-            className="min-h-[40px] -ml-1.5 px-2.5 rounded-full text-xs font-bold text-[var(--mnp-primary)] hover:bg-[var(--mnp-primary-soft)] flex items-center gap-1.5 transition-colors whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mnp-primary)]"
-          >
-            <ArrowLeft className="w-4 h-4 shrink-0" />
-            <span>{t.backToFrontPage}</span>
-          </button>
-        ) : (
-          <span className="text-xs font-bold text-[var(--mnp-primary)] tracking-tight">
+      {/* Minimal Top Bar with Back & Language Switch */}
+      <div className="px-4 pt-3 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5 min-w-0">
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              aria-label={t.back}
+              className="min-h-[44px] min-w-[40px] -ml-2 flex items-center justify-center rounded-full text-[var(--mnp-primary)] hover:bg-[var(--mnp-primary-soft)] shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mnp-primary)]"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+          )}
+          <span className="text-xs font-bold text-[var(--mnp-primary)] tracking-tight truncate">
             {t.appName}
           </span>
-        )}
+        </div>
         <div className="inline-flex rounded-full bg-[var(--mnp-surface-muted)] p-0.5 border border-[var(--mnp-border)]">
           <button
             type="button"
@@ -200,16 +196,8 @@ export const OnboardingView: React.FC<OnboardingViewProps> = ({
       </div>
 
       {/* Clean Airy Center Content */}
-      <div className="px-5 pt-4 pb-6 flex-1 flex flex-col justify-between gap-6">
-        <div className="space-y-4">
-          {contextNotice && step === 'form' && (
-            <div className="rounded-[12px] bg-[var(--mnp-primary-soft)] border border-[var(--mnp-border-strong)] px-3.5 py-2.5 text-center">
-              <p className="text-xs font-semibold text-[var(--mnp-primary)] leading-relaxed">
-                {contextNotice}
-              </p>
-            </div>
-          )}
-
+      <div className="px-5 pt-5 pb-6 flex-1 flex flex-col justify-between gap-6">
+        <div className="space-y-5">
           {/* Clean Emblem + Centered Title */}
           <div className="text-center space-y-2.5">
             <div className="w-16 h-16 mx-auto rounded-full bg-[var(--mnp-primary-soft)] flex items-center justify-center shadow-xs">

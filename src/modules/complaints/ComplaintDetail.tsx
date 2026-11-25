@@ -4,8 +4,10 @@ import {
   CheckCircle2,
   Clock,
   ExternalLink,
+  Lock,
   MapPin,
   RotateCcw,
+  Shield,
   Star,
   UserCheck,
 } from 'lucide-react';
@@ -33,11 +35,23 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({ complaintId, o
   if (!complaint) {
     return (
       <div className="p-4">
-        <div className={UI.emptyState}>
-          <p className="text-sm font-bold text-[var(--mnp-text)]">{t.noComplaintsFound}</p>
-          <button type="button" onClick={onBack} className={UI.btnPrimary}>
-            {t.back}
-          </button>
+        <div className={`${UI.card} p-5 text-center space-y-3`}>
+          <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-950/50 text-red-600 dark:text-red-400 flex items-center justify-center mx-auto">
+            <Lock className="w-6 h-6" />
+          </div>
+          <h2 className="text-base font-bold text-[var(--mnp-text)]">
+            {language === 'hi' ? 'गोपनीयता सुरक्षा: पहुंच प्रतिबंधित' : 'Privacy Protection: Access Restricted'}
+          </h2>
+          <p className="text-xs text-[var(--mnp-text-muted)] max-w-sm mx-auto">
+            {language === 'hi'
+              ? `शिकायत संख्या (${complaintId}) आपके पंजीकृत मोबाइल नंबर (+91 ${citizen.mobile}) से दर्ज नहीं है। नागरिक सुरक्षा नीति के तहत आप केवल अपने द्वारा दर्ज शिकायतें ही देख व ट्रैक कर सकते हैं।`
+              : `Complaint (${complaintId}) was not filed by your registered mobile (+91 ${citizen.mobile}). For citizen privacy and data protection, you can only view complaints registered by your account.`}
+          </p>
+          <div className="pt-2">
+            <button type="button" onClick={onBack} className={UI.btnPrimary}>
+              {t.back}
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -132,11 +146,10 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({ complaintId, o
 
           {complaint.status !== 'Resolved' && complaint.status !== 'Closed' && (
             <div
-              className={`rounded-[10px] px-3 py-2 font-bold flex items-center justify-between gap-2 border ${
-                sla.isOverdue
+              className={`rounded-[10px] px-3 py-2 font-bold flex items-center justify-between gap-2 border ${sla.isOverdue
                   ? 'bg-[var(--mnp-error-bg)] text-[var(--mnp-error)] border-[#F5B8B8] dark:border-[#7A272D]'
                   : 'bg-[var(--mnp-success-bg)] text-[var(--mnp-success)] border-[#A7DFBA] dark:border-[#1E5C38]'
-              }`}
+                }`}
             >
               <span className="flex items-center gap-1.5">
                 {sla.isOverdue ? (
@@ -232,11 +245,10 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({ complaintId, o
                       className="min-h-[48px] min-w-[48px] rounded-[10px] border border-[var(--mnp-border)] bg-[var(--mnp-surface)] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mnp-primary)]"
                     >
                       <Star
-                        className={`w-6 h-6 ${
-                          star <= rating
+                        className={`w-6 h-6 ${star <= rating
                             ? 'fill-[#F59E0B] text-[#D97706]'
                             : 'text-slate-300 dark:text-slate-600'
-                        }`}
+                          }`}
                       />
                     </button>
                   ))}
@@ -329,11 +341,10 @@ export const ComplaintDetail: React.FC<ComplaintDetailProps> = ({ complaintId, o
               {[1, 2, 3, 4, 5].map((s) => (
                 <Star
                   key={s}
-                  className={`w-4 h-4 ${
-                    s <= (complaint.rating || 0)
+                  className={`w-4 h-4 ${s <= (complaint.rating || 0)
                       ? 'fill-[#F59E0B] text-[#D97706]'
                       : 'text-slate-300 dark:text-slate-700'
-                  }`}
+                    }`}
                 />
               ))}
             </div>

@@ -2,11 +2,12 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
-import {defineConfig} from 'vite';
-import {VitePWA} from 'vite-plugin-pwa';
+import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(() => {
   return {
+    base: '/complaint-management-system-maihar/',
     plugins: [
       react(),
       tailwindcss(),
@@ -20,31 +21,31 @@ export default defineConfig(() => {
           'pwa-maskable-512x512.png',
         ],
         manifest: {
-          id: '/',
-          name: 'Maugang Nagar Palika Seva',
-          short_name: 'Maugang Seva',
+          id: '/complaint-management-system-maihar/',
+          name: 'Maihar Nagar Palika Seva',
+          short_name: 'Maihar Seva',
           description:
-            'Citizen and officer municipal services portal for Maugang Nagar Palika, Madhya Pradesh.',
+            'Citizen and officer municipal services portal for Maihar Nagar Palika, Madhya Pradesh.',
           theme_color: '#2196F3',
           background_color: '#F6F8FB',
           display: 'standalone',
-          start_url: '/',
-          scope: '/',
+          start_url: '/complaint-management-system-maihar/',
+          scope: '/complaint-management-system-maihar/',
           icons: [
             {
-              src: '/pwa-192x192.png',
+              src: 'pwa-192x192.png',
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-512x512.png',
+              src: 'pwa-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-maskable-512x512.png',
+              src: 'pwa-maskable-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
@@ -99,21 +100,21 @@ export default defineConfig(() => {
           if (error) {
             return;
           }
-          const distDir = path.resolve(__dirname, 'dist');
-          const srcAssets = path.resolve(__dirname, 'src/assets');
+          const root = import.meta.dirname || process.cwd();
+          const distDir = path.resolve(root, 'dist');
+          const srcAssets = path.resolve(root, 'src/assets');
           const distAssets = path.resolve(distDir, 'src/assets');
           if (fs.existsSync(distDir) && fs.existsSync(srcAssets)) {
-            fs.cpSync(srcAssets, distAssets, {recursive: true, force: true});
+            fs.cpSync(srcAssets, distAssets, { recursive: true, force: true });
           }
         },
       },
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(import.meta.dirname || process.cwd(), '.'),
       },
     },
-    base: '/mauganj-nagar-palika-seva/',
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.

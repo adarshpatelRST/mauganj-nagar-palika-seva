@@ -17,7 +17,7 @@ import { formatDate } from '../../utils/format';
 export const CityInfoView: React.FC = () => {
   const { notices, contacts, wardDirectory, language, t, showToast } = useApp();
   const [tab, setTab] = useState<'contacts' | 'wards' | 'notices' | 'certs'>('contacts');
-  const [appId, setAppId] = useState('MUG-BC-2026-101');
+  const [appId, setAppId] = useState('MHR-BC-2026-101');
   const [certResult, setCertResult] = useState<CertificateApplication | null>(null);
   const [certError, setCertError] = useState('');
 

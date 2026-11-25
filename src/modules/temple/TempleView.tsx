@@ -120,7 +120,7 @@ export const TempleView: React.FC = () => {
         <div className="grid grid-cols-2 gap-2 text-xs">
           <div className={`${UI.surfaceMuted} p-2.5 space-y-1`}>
             <div className="font-bold text-[var(--mnp-text)]">
-              {language === 'hi' ? 'प्रवेश व ई-रिक्शा सेवा' : 'Main Gate & Shuttle'}
+              {language === 'hi' ? 'रोपवे (उड़नखटोला)' : 'Ropeway Service'}
             </div>
             <p className="text-[var(--mnp-text-secondary)]">
               {language === 'hi' ? templeFeed.ropewayStatusHi : templeFeed.ropewayStatusEn}
@@ -128,7 +128,7 @@ export const TempleView: React.FC = () => {
           </div>
           <div className={`${UI.surfaceMuted} p-2.5 space-y-1`}>
             <div className="font-bold text-[var(--mnp-text)]">
-              {language === 'hi' ? 'परिक्रमा व बहुती प्रपात' : 'Parikrama & Bahuti'}
+              {language === 'hi' ? 'पैदल सीढ़ी मार्ग' : 'Stairs Route'}
             </div>
             <p className="text-[var(--mnp-text-secondary)]">
               {language === 'hi' ? templeFeed.stairsNoteHi : templeFeed.stairsNoteEn}
